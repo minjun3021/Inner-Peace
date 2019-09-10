@@ -493,7 +493,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
  /**
 	 * If the TgStreamReader is created, just change the bluetooth
 	 * else create TgStreamReader, set data receiver, TgStreamHandler and parser
-	 * @param bd
+	 * @param
 	 * @return TgStreamReader
 	 */
 	public TgStreamReader createStreamReader(BluetoothDevice bd){
@@ -514,7 +514,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
  
  /**
   * Check whether the given device is bonded, if not, bond it 
-  * @param bd
+  * @param
   */
  public void bindToDevice(BluetoothDevice bd){
  	    int ispaired = 0;
