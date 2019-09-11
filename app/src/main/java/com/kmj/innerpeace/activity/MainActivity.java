@@ -1,4 +1,4 @@
-package com.kmj.innerpeace;
+package com.kmj.innerpeace.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.kmj.innerpeace.FragmentUtils;
+import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.fragment.DiaryFragment;
 import com.kmj.innerpeace.fragment.HomeFragment;
 import com.kmj.innerpeace.fragment.MusicFragment;

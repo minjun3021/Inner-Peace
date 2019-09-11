@@ -1,16 +1,5 @@
 package com.kmj.innerpeace;
 
-import java.lang.reflect.Method;
-import java.util.Set;
-
-import com.neurosky.connection.ConnectionStates;
-import com.neurosky.connection.EEGPower;
-import com.neurosky.connection.TgStreamHandler;
-import com.neurosky.connection.TgStreamReader;
-import com.neurosky.connection.DataType.BodyDataType;
-import com.neurosky.connection.DataType.MindDataType;
-import com.neurosky.connection.DataType.MindDataType.FilterType;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -18,26 +7,38 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.LayoutInflater;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.neurosky.connection.ConnectionStates;
+import com.neurosky.connection.DataType.MindDataType;
+import com.neurosky.connection.DataType.MindDataType.FilterType;
+import com.neurosky.connection.EEGPower;
+import com.neurosky.connection.TgStreamHandler;
+import com.neurosky.connection.TgStreamReader;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
+import java.lang.reflect.Method;
+import java.util.Set;
 
 /**
  * This activity demonstrates how to use the constructor:
@@ -51,7 +52,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class BluetoothDeviceDemoActivity extends Activity {
 	private static final String TAG = BluetoothDeviceDemoActivity.class.getSimpleName();
 	private TgStreamReader tgStreamReader;
-	
+	int cnt=0;
 	// TODO connection sdk
 	private BluetoothAdapter mBluetoothAdapter;
 	private BluetoothDevice mBluetoothDevice;
@@ -60,6 +61,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Logger.addLogAdapter(new AndroidLogAdapter());
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.bluetoothdevice_view);
@@ -238,7 +240,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
 				//byte[] cmd = new byte[1];
 				//cmd[0] = 's';
 				//tgStreamReader.sendCommandtoDevice(cmd);
-				LinkDetectedHandler.sendEmptyMessageDelayed(1234, 5000);
+				LinkDetectedHandler.sendEmptyMessageDelayed(1234, 5000); //do not
 				break;
 			case ConnectionStates.STATE_GET_DATA_TIME_OUT:
 				//get data time out
@@ -319,7 +321,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
         	case 1235:
         		tgStreamReader.MWM15_setFilterType(FilterType.FILTER_60HZ);
         		Log.d(TAG,"MWM15_setFilter  60HZ");
-        		LinkDetectedHandler.sendEmptyMessageDelayed(1237, 1000);
+        		LinkDetectedHandler.sendEmptyMessageDelayed(1237, 1000); //asdf
         		break;
         	case 1236:
         		tgStreamReader.MWM15_setFilterType(FilterType.FILTER_50HZ);
@@ -364,6 +366,9 @@ public class BluetoothDeviceDemoActivity extends Activity {
 			case MindDataType.CODE_EEGPOWER:
 				EEGPower power = (EEGPower)msg.obj;
 				if(power.isValidate()){
+					//Logger.e(String.valueOf(power.delta));
+					//here
+					cnt++;
 					tv_delta.setText("" +power.delta);
 					tv_theta.setText("" +power.theta);
 					tv_lowalpha.setText("" +power.lowAlpha);
@@ -372,6 +377,8 @@ public class BluetoothDeviceDemoActivity extends Activity {
 					tv_highbeta.setText("" +power.highBeta);
 					tv_lowgamma.setText("" +power.lowGamma);
 					tv_middlegamma.setText("" +power.middleGamma);
+					//NetworkHelper.getInstance().egg(power);
+					Logger.e(String.valueOf(cnt));
 				}
 				break;
 			case MindDataType.CODE_POOR_SIGNAL://
