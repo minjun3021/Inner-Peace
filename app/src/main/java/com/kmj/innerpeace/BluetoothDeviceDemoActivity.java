@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kmj.innerpeace.Data.EEGData;
+import com.kmj.innerpeace.Data.SendData;
 import com.kmj.innerpeace.retrofit.NetworkHelper;
 import com.neurosky.connection.ConnectionStates;
 import com.neurosky.connection.DataType.MindDataType;
@@ -58,6 +59,7 @@ import retrofit2.Response;
  */
 public class BluetoothDeviceDemoActivity extends Activity {
     EEGData data;
+    SendData sendData;
     ArrayList<Integer> delta;
     ArrayList<Integer> theta;
     ArrayList<Integer> lowAlpha;
@@ -65,8 +67,42 @@ public class BluetoothDeviceDemoActivity extends Activity {
     ArrayList<Integer> lowBeta;
     ArrayList<Integer> highBeta;
     ArrayList<Integer> lowGamma;
-    ArrayList<Integer> middleGamma;
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent qwer) {
+
+
+        cnt = 0;
+        sendData=new SendData(label,data);
+
+
+
+        NetworkHelper.getInstance().egg(sendData).enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Logger.e(response.message());
+
+
+                theta.clear();
+                lowAlpha.clear();
+                highAlpha.clear();
+                lowBeta.clear();
+                highBeta.clear();
+                lowGamma.clear();
+                middleGamma.clear();
+                delta.clear();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Logger.e(t.getMessage());
+            }
+        });
+        super.onActivityResult(requestCode, resultCode, qwer);
+    }
+
+    ArrayList<Integer> middleGamma;
+    static int label=0;
 
     private static final String TAG = BluetoothDeviceDemoActivity.class.getSimpleName();
     private TgStreamReader tgStreamReader;
@@ -79,6 +115,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         delta = new ArrayList<>();
         theta = new ArrayList<>();
         lowAlpha = new ArrayList<>();
@@ -417,37 +454,14 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
                         Logger.e(String.valueOf(cnt));
-                        if (cnt ==60) {
+                        if (cnt ==10) {
+
                             if (tgStreamReader != null) {
                                 tgStreamReader.stop();
                             }
-                            cnt = 0;
-
-
                             data = new EEGData(delta, theta, lowAlpha, highAlpha, lowBeta, highBeta, lowGamma, middleGamma);
-
-
-                            NetworkHelper.getInstance().egg(data).enqueue(new retrofit2.Callback<Void>() {
-                                @Override
-                                public void onResponse(Call<Void> call, Response<Void> response) {
-                                    Logger.e(response.message());
-
-
-                                    theta.clear();
-                                    lowAlpha.clear();
-                                    highAlpha.clear();
-                                    lowBeta.clear();
-                                    highBeta.clear();
-                                    lowGamma.clear();
-                                    middleGamma.clear();
-                                    delta.clear(); 
-                                }
-
-                                @Override
-                                public void onFailure(Call<Void> call, Throwable t) {
-                                    Logger.e(t.getMessage());
-                                }
-                            });
+                            Intent intent=new Intent(BluetoothDeviceDemoActivity.this,SelectActivity.class);
+                            startActivityForResult(intent,3000);
 
                         }
                     }

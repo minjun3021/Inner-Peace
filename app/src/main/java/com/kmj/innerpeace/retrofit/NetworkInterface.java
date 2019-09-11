@@ -1,7 +1,7 @@
 package com.kmj.innerpeace.retrofit;
 
 
-import com.kmj.innerpeace.Data.EEGData;
+import com.kmj.innerpeace.Data.SendData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,7 +32,7 @@ public interface NetworkInterface {
 //    Call<ArrayList<RecordModel>> Record(@Field("token") String token);
 
     @POST("/save")
-    Call<Void> egg(@Body EEGData eegData);
+    Call<Void> egg(@Body SendData sendData);
 
 
 
