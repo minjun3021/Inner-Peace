@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kmj.innerpeace.Data.EEGData;
+import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
 import com.kmj.innerpeace.retrofit.NetworkHelper;
 import com.neurosky.connection.ConnectionStates;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 
@@ -73,14 +75,14 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
         cnt = 0;
-        sendData=new SendData(label,data);
+        sendData = new SendData(label, data);
 
 
-
-        NetworkHelper.getInstance().egg(sendData).enqueue(new retrofit2.Callback<Void>() {
+        NetworkHelper.getInstance().egg(sendData).enqueue(new Callback<SaveRes>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Logger.e(response.message());
+            public void onResponse(Call<SaveRes> call, Response<SaveRes> response) {
+                Logger.e(response.body().getMessage());
+                Logger.e(response.body().getResult());
 
 
                 theta.clear();
@@ -94,15 +96,15 @@ public class BluetoothDeviceDemoActivity extends Activity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Logger.e(t.getMessage());
+            public void onFailure(Call<SaveRes> call, Throwable t) {
+                Logger.e(t.toString());
             }
         });
         super.onActivityResult(requestCode, resultCode, qwer);
     }
 
     ArrayList<Integer> middleGamma;
-    static int label=0;
+    static int label = 0;
 
     private static final String TAG = BluetoothDeviceDemoActivity.class.getSimpleName();
     private TgStreamReader tgStreamReader;
@@ -454,14 +456,14 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
                         Logger.e(String.valueOf(cnt));
-                        if (cnt ==10) {
+                        if (cnt == 10) {
 
                             if (tgStreamReader != null) {
                                 tgStreamReader.stop();
                             }
                             data = new EEGData(delta, theta, lowAlpha, highAlpha, lowBeta, highBeta, lowGamma, middleGamma);
-                            Intent intent=new Intent(BluetoothDeviceDemoActivity.this,SelectActivity.class);
-                            startActivityForResult(intent,3000);
+                            Intent intent = new Intent(BluetoothDeviceDemoActivity.this, SelectActivity.class);
+                            startActivityForResult(intent, 3000);
 
                         }
                     }

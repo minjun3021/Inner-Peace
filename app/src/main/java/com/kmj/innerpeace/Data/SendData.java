@@ -4,7 +4,7 @@ public class SendData {
     int label;
     EEGData data ;
 
-    public SendData(int label, EEGData data) {   v
+    public SendData(int label, EEGData data) {
         this.label = label;
         this.data = data;
     }

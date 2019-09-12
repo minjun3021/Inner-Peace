@@ -1,6 +1,7 @@
 package com.kmj.innerpeace.retrofit;
 
 
+import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
 
 import retrofit2.Call;
@@ -32,7 +33,7 @@ public interface NetworkInterface {
 //    Call<ArrayList<RecordModel>> Record(@Field("token") String token);
 
     @POST("/save")
-    Call<Void> egg(@Body SendData sendData);
+    Call<SaveRes> egg(@Body SendData sendData);
 
 
 
