@@ -456,7 +456,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
                         Logger.e(String.valueOf(cnt));
-                        if (cnt == 10) {
+                        if (cnt == 60) {
 
                             if (tgStreamReader != null) {
                                 tgStreamReader.stop();
