@@ -1,11 +1,14 @@
 package com.kmj.innerpeace.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.kmj.innerpeace.FragmentUtils;
 import com.kmj.innerpeace.R;
@@ -30,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setup();
+    }
+
+    void setup() {
+        Window window = getWindow();
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.parseColor("#121319"));
+
         fragments=new ArrayList<>();
         profileFragment=new ProfileFragment();
         diaryFragment=new DiaryFragment();
