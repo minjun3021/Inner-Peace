@@ -14,26 +14,28 @@ import android.widget.Toast;
 import com.kmj.innerpeace.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText id,pw,name,email,phone;
+    EditText id, pw, name, phone;
     Button register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setup();
     }
-    void setup(){
+
+    void setup() {
         Window window = getWindow();
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
 
-        id=findViewById(R.id.register_id);
-        pw=findViewById(R.id.register_pw);
-        name=findViewById(R.id.register_name);
-        email=findViewById(R.id.register_email);
-        phone=findViewById(R.id.register_phonenumber);
-        register=findViewById(R.id.register_btn);
+        id = findViewById(R.id.register_id);
+        pw = findViewById(R.id.register_pw);
+        name = findViewById(R.id.register_name);
+
+        phone = findViewById(R.id.register_phonenumber);
+        register = findViewById(R.id.register_btn);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,16 +43,14 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!id.getText().toString().replace(" ", "").equals("")) {
                     if (!pw.getText().toString().replace(" ", "").equals("")) {
                         if (!name.getText().toString().replace(" ", "").equals("")) {
-                            if (!email.getText().toString().replace(" ", "").equals("")) {
-                                if (!phone.getText().toString().replace(" ", "").equals("")) {
-                                    //TODO retrofit
-                                    tryRegister();
-                                } else {
-                                    Toast.makeText(RegisterActivity.this, "phone number를 입력하세요.", Toast.LENGTH_SHORT).show();
-                                }
+
+                            if (!phone.getText().toString().replace(" ", "").equals("")) {
+                                //TODO retrofit
+                                tryRegister();
                             } else {
-                                Toast.makeText(RegisterActivity.this, "email를 입력하세요.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "phone number를 입력하세요.", Toast.LENGTH_SHORT).show();
                             }
+
                         } else {
                             Toast.makeText(RegisterActivity.this, "name를 입력하세요.", Toast.LENGTH_SHORT).show();
                         }
@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
     void tryRegister() {
         Toast.makeText(this, "Wait", Toast.LENGTH_SHORT).show();
     }

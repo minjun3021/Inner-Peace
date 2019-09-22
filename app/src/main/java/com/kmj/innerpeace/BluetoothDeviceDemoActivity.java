@@ -81,18 +81,25 @@ public class BluetoothDeviceDemoActivity extends Activity {
         NetworkHelper.getInstance().egg(sendData).enqueue(new Callback<SaveRes>() {
             @Override
             public void onResponse(Call<SaveRes> call, Response<SaveRes> response) {
-                Logger.e(response.body().getMessage());
-                Logger.e(response.body().getResult());
+                if (response.isSuccessful() && response.body() != null) {
+                    Logger.e(response.body().getMessage());
+                    Logger.e(response.body().getResult());
 
-
-                theta.clear();
-                lowAlpha.clear();
-                highAlpha.clear();
-                lowBeta.clear();
-                highBeta.clear();
-                lowGamma.clear();
-                middleGamma.clear();
-                delta.clear();
+                    theta.clear();
+                    lowAlpha.clear();
+                    highAlpha.clear();
+                    lowBeta.clear();
+                    highBeta.clear();
+                    lowGamma.clear();
+                    middleGamma.clear();
+                    delta.clear();
+                }
+                else if (response.isSuccessful()) {
+                    Logger.e("response body null");
+                }
+                else {
+                    Logger.e("different error : " + response.code());
+                }
             }
 
             @Override
@@ -456,7 +463,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
                         Logger.e(String.valueOf(cnt));
-                        if (cnt == 60) {
+                        if (cnt == 30) {
 
                             if (tgStreamReader != null) {
                                 tgStreamReader.stop();

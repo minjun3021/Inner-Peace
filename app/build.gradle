@@ -43,7 +43,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
-
+    implementation 'com.loopeer.lib:shadow:0.0.4-beta3'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 
 }
 repositories {

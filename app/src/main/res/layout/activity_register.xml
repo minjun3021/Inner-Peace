@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121319"
-    tools:context=".activity.RegisterActivity"
-    >
+    tools:context=".activity.RegisterActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,8 +38,7 @@
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_img"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_img" />
 
         <TextView
             android:id="@+id/register_idtext"
@@ -70,8 +68,7 @@
             android:textColor="#CCffffff"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_idtext"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_idtext" />
 
         <TextView
             android:id="@+id/register_pwtext"
@@ -94,15 +91,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="72dp"
             android:backgroundTint="#fff"
+            android:inputType="textPassword"
             android:maxLength="20"
             android:maxLines="1"
-            android:inputType="textPassword"
             android:singleLine="true"
             android:textColor="#CCffffff"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_pwtext"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_pwtext" />
 
         <TextView
             android:id="@+id/register_nametext"
@@ -125,46 +121,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="72dp"
             android:backgroundTint="#fff"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:singleLine="true"
             android:inputType="textPersonName"
-            android:textColor="#CCffffff"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_nametext"
-            />
-
-        <TextView
-            android:id="@+id/register_emailtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:letterSpacing="0.03"
-            android:lineSpacingExtra="6sp"
-            android:text="E-Mail"
-            android:textColor="#ffffff"
-            android:textSize="11sp"
-            app:layout_constraintLeft_toLeftOf="@id/register_idtext"
-            app:layout_constraintTop_toBottomOf="@id/register_name"
-
-            />
-
-        <EditText
-            android:id="@+id/register_email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="72dp"
-            android:backgroundTint="#fff"
             android:maxLength="20"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="#CCffffff"
-            android:inputType="textEmailAddress"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_emailtext"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_nametext" />
+
 
         <TextView
             android:id="@+id/register_phonenumbertext"
@@ -177,7 +142,7 @@
             android:textColor="#ffffff"
             android:textSize="11sp"
             app:layout_constraintLeft_toLeftOf="@id/register_idtext"
-            app:layout_constraintTop_toBottomOf="@id/register_email"
+            app:layout_constraintTop_toBottomOf="@id/register_name"
 
             />
 
@@ -187,31 +152,30 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="72dp"
             android:backgroundTint="#fff"
+            android:inputType="phone"
             android:maxLength="20"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="#CCffffff"
-            android:inputType="phone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_phonenumbertext"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_phonenumbertext" />
+
         <Button
             android:id="@+id/register_btn"
             android:layout_width="0dp"
             android:layout_height="33dp"
             android:layout_marginTop="33dp"
-            android:textColor="#fff"
+            android:layout_marginBottom="55dp"
             android:background="@drawable/bg_login_btn"
-            android:text="Log In"
-            android:textSize="11sp"
-
             android:elevation="1dp"
+            android:text="Log In"
+
+            android:textColor="#fff"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/register_phonenumber"
             app:layout_constraintRight_toRightOf="@id/register_phonenumber"
-            app:layout_constraintTop_toBottomOf="@id/register_phonenumber"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="55dp"
-            />
+            app:layout_constraintTop_toBottomOf="@id/register_phonenumber" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
