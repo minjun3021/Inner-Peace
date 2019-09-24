@@ -40,7 +40,7 @@
         android:layout_marginTop="59dp"
         android:letterSpacing="0.03"
         android:lineSpacingExtra="6sp"
-        android:text="ID"
+        android:text="Email"
         android:textColor="#ffffff"
         android:textSize="11sp"
         app:layout_constraintLeft_toLeftOf="@id/login_id"
@@ -51,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="72dp"
-        android:hint="write email."
+
         android:textColorHint="#CCffffff"
         android:backgroundTint="#fff"
 

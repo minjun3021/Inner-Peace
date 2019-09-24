@@ -2,6 +2,7 @@ package com.kmj.innerpeace.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -11,7 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.R;
+import com.kmj.innerpeace.retrofit.NetworkHelper;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText id, pw, name, phone;
@@ -25,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     void setup() {
+        Logger.addLogAdapter(new AndroidLogAdapter());
         Window window = getWindow();
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -76,6 +86,31 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     void tryRegister() {
-        Toast.makeText(this, "Wait", Toast.LENGTH_SHORT).show();
+        NetworkHelper.getInstance().register(id.getText().toString(),pw.getText().toString(),name.getText().toString(),phone.getText().toString()).enqueue(new Callback<RegisterData>() {
+            @Override
+            public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
+                if(response.isSuccessful() && response!=null){
+                    Toast.makeText(RegisterActivity.this, name.getText().toString()+"님 회원가입 성공", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 1000);
+                    Logger.e(response.body().getMessage());
+                }
+                else if(response.isSuccessful()){
+
+                }
+                else{
+                    Toast.makeText(RegisterActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterData> call, Throwable t) {
+
+            }
+        });
     }
 }

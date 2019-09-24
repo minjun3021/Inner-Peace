@@ -47,7 +47,7 @@
             android:layout_marginTop="38dp"
             android:letterSpacing="0.03"
             android:lineSpacingExtra="6sp"
-            android:text="ID"
+            android:text="Email"
             android:textColor="#ffffff"
             android:textSize="11sp"
 
@@ -169,7 +169,7 @@
             android:layout_marginBottom="55dp"
             android:background="@drawable/bg_login_btn"
             android:elevation="1dp"
-            android:text="Log In"
+            android:text="Sign Up"
 
             android:textColor="#fff"
             android:textSize="11sp"

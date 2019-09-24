@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkHelper {
     final static String url = "http://3.130.54.219";
-    final static int port = 3000;
+    final static int port = 8000;
 //3.130.54.219:3000
 
     private static Retrofit retrofit;

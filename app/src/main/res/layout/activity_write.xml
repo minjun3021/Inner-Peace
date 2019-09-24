@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121319"
+    tools:context=".activity.WriteActivity">
+
+    <ImageView
+        android:id="@+id/write_back"
+        android:layout_width="7dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="26dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="@id/write_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/write_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="34dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/write_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="8sp"
+        android:text="김민준"
+        android:textColor="#ffffff"
+
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@id/write_profile"
+        app:layout_constraintLeft_toRightOf="@id/write_profile"
+        app:layout_constraintTop_toTopOf="@id/write_profile" />
+
+    <Button
+        android:layout_width="54dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/bg_diary"
+        android:backgroundTint="#693ca3"
+        android:text="확인"
+        android:textColor="#fff"
+        android:textSize="9dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_profile"
+        app:layout_constraintRight_toRightOf="@id/write_content"
+        app:layout_constraintTop_toTopOf="@id/write_profile" />
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/write_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="25dp"
+
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="46dp"
+        android:elevation="10dp"
+        app:backgroundColor="#121319"
+        app:cornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/write_profile"
+        app:shadowColor="#29ffffff"
+
+        app:shadowMarginBottom="10dp"
+        app:shadowMarginRight="10dp"
+
+        app:shadowRadius="14dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/bg_diary" />
+
+
+    </com.loopeer.shadow.ShadowView>
+
+    <ImageView
+        android:id="@+id/write_camera"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/bg_soso"
+        android:tint="#00D5C6C6"
+        android:translationZ="11dp"
+
+        app:layout_constraintBottom_toBottomOf="@id/write_content"
+        app:layout_constraintLeft_toLeftOf="@id/write_content"
+        app:layout_constraintRight_toLeftOf="@id/verygimotti"
+
+
+        />
+
+    <ImageView
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:src="@drawable/ic_photo"
+        android:tint="#fff"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toLeftOf="@id/write_camera"
+        app:layout_constraintRight_toRightOf="@id/write_camera"
+        app:layout_constraintTop_toTopOf="@id/write_camera" />
+
+    <Button
+        android:id="@+id/verygimotti"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_verygimotti"
+        android:stateListAnimator="@null"
+        android:text="매우좋음"
+        android:textColor="#fff"
+        android:textSize="7sp"
+        android:translationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toRightOf="@id/write_camera"
+        app:layout_constraintRight_toLeftOf="@id/gimotti"
+
+        />
+
+    <Button
+        android:id="@+id/gimotti"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_gimotti"
+        android:stateListAnimator="@null"
+        android:text="좋음"
+        android:textColor="#fff"
+        android:textSize="7sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toRightOf="@id/verygimotti"
+        app:layout_constraintRight_toLeftOf="@id/soso"
+
+        />
+
+    <Button
+        android:id="@+id/soso"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_soso"
+        android:stateListAnimator="@null"
+        android:text="보통"
+        android:textColor="#fff"
+        android:textSize="7sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toRightOf="@id/gimotti"
+        app:layout_constraintRight_toLeftOf="@id/bad"
+
+        />
+
+    <Button
+        android:id="@+id/bad"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_bad"
+        android:stateListAnimator="@null"
+        android:text="나쁨"
+        android:textColor="#fff"
+        android:textSize="7sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toRightOf="@id/soso"
+        app:layout_constraintRight_toLeftOf="@id/verybad" />
+
+    <Button
+        android:id="@+id/verybad"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_verybad"
+        android:stateListAnimator="@null"
+        android:text="매우나쁨"
+        android:textColor="#fff"
+        android:textSize="7sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_camera"
+        app:layout_constraintLeft_toRightOf="@id/bad"
+        app:layout_constraintRight_toRightOf="@id/write_content"
+
+        />
+
+
+    <TextView
+        android:id="@+id/write_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="제목 : "
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="@id/write_content"
+        app:layout_constraintTop_toTopOf="@id/write_content" />
+
+    <TextView
+        android:id="@+id/write_content_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="16dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="내용 :"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="@id/write_content"
+        app:layout_constraintTop_toBottomOf="@id/write_title_text" />
+
+    <EditText
+        android:id="@+id/write_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="72dp"
+        android:background="@null"
+        android:backgroundTint="#fff"
+        android:maxLength="15"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/write_title_text"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/write_title_text"
+        app:layout_constraintRight_toRightOf="@id/write_content"
+        app:layout_constraintTop_toTopOf="@id/write_title_text" />
+
+    <EditText
+        android:id="@+id/write_story"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="72dp"
+        android:background="@null"
+        android:backgroundTint="#fff"
+        android:maxLength="100"
+        android:maxLines="7"
+
+        android:textColor="#ffffff"
+        android:textSize="13sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/write_content_text"
+        app:layout_constraintRight_toRightOf="@id/write_content"
+        app:layout_constraintTop_toTopOf="@id/write_content_text" />
+
+    <ImageView
+        android:id="@+id/write_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/bg_soso"
+        android:scaleType="fitXY"
+        android:src="@drawable/sea"
+        android:translationZ="11dp"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="W,1:1"
+        app:layout_constraintLeft_toLeftOf="@id/write_content"
+        app:layout_constraintRight_toLeftOf="@id/write_emotion"
+        app:layout_constraintTop_toBottomOf="@id/write_story"
+
+        />
+
+    <Button
+        android:id="@+id/write_emotion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_soso"
+
+        android:stateListAnimator="@null"
+        android:text="감정을 선택하세요."
+        android:textColor="#fff"
+        android:textSize="15sp"
+        android:translationZ="11dp"
+        app:layout_constraintDimensionRatio="W,1:2"
+
+
+        app:layout_constraintLeft_toRightOf="@id/write_image"
+        app:layout_constraintRight_toRightOf="@id/write_content"
+        app:layout_constraintTop_toBottomOf="@id/write_story"
+        app:layout_goneMarginLeft="15dp" />
+</android.support.constraint.ConstraintLayout>

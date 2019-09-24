@@ -1,14 +1,18 @@
 package com.kmj.innerpeace.retrofit;
 
 
+import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface NetworkInterface {
+
 //    @POST("/user/register")
 //    @FormUrlEncoded
 //    Call<RegisterModel> Register(@Field("name") String name, @Field("facebookId") String facebookId, @Field("profileURL") String profileURL);
@@ -35,6 +39,12 @@ public interface NetworkInterface {
     @POST("/save")
     Call<SaveRes> egg(@Body SendData sendData);
 
+    @POST("/auth/register")
+    @FormUrlEncoded
+    Call<RegisterData> register(@Field("email") String email,@Field("password") String password,@Field("name") String name,@Field("phone") String phone);
 
+    @POST("/auth/login")
+    @FormUrlEncoded
+    Call<RegisterData> login(@Field("email") String email,@Field("password") String password);
 
 }

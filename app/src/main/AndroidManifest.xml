@@ -17,23 +17,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.RegisterActivity"></activity>
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.WriteActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SelectActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BluetoothAdapterDemoActivity" />
-        <activity android:name=".BluetoothDeviceDemoActivity" />
-        <activity android:name=".DemoActivity" />
-        <activity android:name=".FileDemoActivity" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".BluetoothAdapterDemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BluetoothDeviceDemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FileDemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

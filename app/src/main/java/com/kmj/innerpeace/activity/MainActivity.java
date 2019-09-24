@@ -17,6 +17,9 @@ import com.kmj.innerpeace.fragment.HomeFragment;
 import com.kmj.innerpeace.fragment.MusicFragment;
 import com.kmj.innerpeace.fragment.PlaylistFragment;
 import com.kmj.innerpeace.fragment.ProfileFragment;
+import com.kmj.innerpeace.util.BackPressCloseHandler;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     MusicFragment musicFragment;
     PlaylistFragment playlistFragment;
+    BackPressCloseHandler backPressCloseHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     void setup() {
         Window window = getWindow();
-
+        Logger.addLogAdapter(new AndroidLogAdapter());
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
-
+        backPressCloseHandler = new BackPressCloseHandler(this);
         fragments=new ArrayList<>();
         profileFragment=new ProfileFragment();
         diaryFragment=new DiaryFragment();
@@ -79,5 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+        //super.onBackPressed();
     }
 }
