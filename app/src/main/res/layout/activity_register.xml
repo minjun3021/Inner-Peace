@@ -7,7 +7,7 @@
     android:background="#121319"
     tools:context=".activity.RegisterActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -177,5 +177,5 @@
             app:layout_constraintLeft_toLeftOf="@id/register_phonenumber"
             app:layout_constraintRight_toRightOf="@id/register_phonenumber"
             app:layout_constraintTop_toBottomOf="@id/register_phonenumber" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

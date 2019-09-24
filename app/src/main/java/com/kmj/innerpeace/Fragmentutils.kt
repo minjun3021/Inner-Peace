@@ -1,30 +1,27 @@
 package com.kmj.innerpeace
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import java.util.ArrayList
+import java.util.*
 
-class FragmentUtils(internal val containerId: Int, internal var fragments: ArrayList<Fragment>) {
-    var currentFragment: Fragment? = null
+class FragmentUtils(internal val containerId: Int, internal var fragments: ArrayList<androidx.fragment.app.Fragment>) {
+    var currentFragment: androidx.fragment.app.Fragment? = null
     var currentIndex: Int = 0
     val fragmentCount: Int = fragments.size
 
 
-    fun getFragmentByPosition(position: Int, args: Bundle?): Fragment {
+    fun getFragmentByPosition(position: Int, args: Bundle?): androidx.fragment.app.Fragment {
         if (position < 0 || position >= fragmentCount)
             throw IllegalArgumentException("position invalid")
         return fragments[position]
     }
 
-    fun setCurrentFragmentByPosition(fm: FragmentManager, position: Int, args: Bundle?) {
+    fun setCurrentFragmentByPosition(fm: androidx.fragment.app.FragmentManager, position: Int, args: Bundle?) {
         try {
             var args = args
             currentIndex = position
             val ft = fm.beginTransaction()
             val tag = getFragmentTagByPosition(position)
-            var fragment: Fragment? = fm.findFragmentByTag(tag)
+            var fragment: androidx.fragment.app.Fragment? = fm.findFragmentByTag(tag)
             if (fragment == null) {
                 if (args == null) args = Bundle()
                 fragment = getFragmentByPosition(position, args)
@@ -41,8 +38,8 @@ class FragmentUtils(internal val containerId: Int, internal var fragments: Array
         }
     }
 
-    private fun postUpdateFragment(fm: FragmentManager,
-                                   ft: FragmentTransaction, fragment: Fragment,
+    private fun postUpdateFragment(fm: androidx.fragment.app.FragmentManager,
+                                   ft: androidx.fragment.app.FragmentTransaction, fragment: androidx.fragment.app.Fragment,
                                    position: Int) {
         hideFragmentExcept(fm, ft, position)
         fragment.setMenuVisibility(true)
@@ -50,10 +47,10 @@ class FragmentUtils(internal val containerId: Int, internal var fragments: Array
         ft.commitNowAllowingStateLoss()
     }
 
-    private fun hideFragmentExcept(fm: FragmentManager,
-                                   ft: FragmentTransaction,
+    private fun hideFragmentExcept(fm: androidx.fragment.app.FragmentManager,
+                                   ft: androidx.fragment.app.FragmentTransaction,
                                    position: Int) {
-        var fragment: Fragment? = null
+        var fragment: androidx.fragment.app.Fragment? = null
         for (i in 0 until fragmentCount) {
             if (i != position) {
                 fragment = fm.findFragmentByTag(getFragmentTagByPosition(i))

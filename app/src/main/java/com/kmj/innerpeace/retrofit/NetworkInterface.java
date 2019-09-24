@@ -1,6 +1,8 @@
 package com.kmj.innerpeace.retrofit;
 
 
+import com.kmj.innerpeace.Data.DiaryData;
+import com.kmj.innerpeace.Data.Diarys;
 import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
@@ -9,6 +11,8 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface NetworkInterface {
@@ -47,4 +51,9 @@ public interface NetworkInterface {
     @FormUrlEncoded
     Call<RegisterData> login(@Field("email") String email,@Field("password") String password);
 
+    @POST("/post/write")
+    @FormUrlEncoded
+    Call<DiaryData> uploadPost(@Header("Authorization") String token,@Field("title")String title,@Field("content") String content,@Field("emotion")String emotion,@Field("img") String img);
+    @GET("/post/getMyPosts")
+    Call<Diarys> getMyPosts(@Header("Authorization") String token);
 }

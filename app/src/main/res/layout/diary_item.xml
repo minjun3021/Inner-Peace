@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/item_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+
+        android:elevation="10dp"
+
+        android:paddingBottom="40dp"
+        app:backgroundColor="#121319"
+        app:cornerRadius="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="#29ffffff"
+        app:shadowMarginBottom="10dp"
+        app:shadowMarginRight="10dp"
+        app:shadowRadius="14dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/bg_diary" />
+
+
+    </com.loopeer.shadow.ShadowView>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_profile"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="@id/item_content"
+        app:layout_constraintTop_toTopOf="@id/item_content" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="ㅁㅁㅁ"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toRightOf="@id/item_profile"
+        app:layout_constraintTop_toTopOf="@id/item_profile" />
+
+    <TextView
+        android:id="@+id/item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="2h ago"
+        android:textColor="#ffffff"
+        android:textSize="9sp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_profile"
+        app:layout_constraintLeft_toLeftOf="@id/item_name" />
+
+    <ImageView
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginRight="24dp"
+        android:src="@drawable/ic_threedots"
+        android:tint="#fff"
+        android:id="@+id/item_delete"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_profile"
+        app:layout_constraintRight_toRightOf="@id/item_content"
+        app:layout_constraintTop_toTopOf="@id/item_profile"
+
+        />
+
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/bg_soso"
+
+        android:src="@drawable/sea"
+        android:translationZ="11dp"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="W,1:1"
+        app:layout_constraintLeft_toLeftOf="@id/item_content"
+        app:layout_constraintRight_toLeftOf="@id/item_emotion"
+        app:layout_constraintTop_toTopOf="@id/item_emotion"
+
+        />
+
+    <Button
+        android:id="@+id/item_emotion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_soso"
+
+        android:stateListAnimator="@null"
+        android:text="감정을 선택하세요."
+        android:textColor="#fff"
+        android:textSize="15sp"
+        android:translationZ="11dp"
+        app:layout_constraintDimensionRatio="W,1:2"
+
+        app:layout_constraintLeft_toRightOf="@id/item_image"
+        app:layout_constraintRight_toRightOf="@id/item_content"
+        app:layout_constraintTop_toBottomOf="@id/item_time"
+
+        app:layout_goneMarginLeft="15dp" />
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="여름방학 끝"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="@id/item_profile"
+        app:layout_constraintTop_toBottomOf="@id/item_emotion"
+
+        />
+
+    <TextView
+        android:id="@+id/item_story"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:lines="4"
+        android:maxLength="100"
+        android:maxLines="7"
+        android:text="여름방학이 끝났다"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:translationZ="11dp"
+        app:layout_constraintLeft_toLeftOf="@id/item_title"
+        app:layout_constraintRight_toRightOf="@id/item_content"
+        app:layout_constraintTop_toBottomOf="@id/item_title" />
+    <TextView
+        android:id="@+id/item_check"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="6sp"
+        android:lines="4"
+        android:maxLength="100"
+        android:maxLines="7"
+        android:text="측정지수"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:translationZ="11dp"
+        app:layout_constraintRight_toRightOf="@id/item_story"
+        app:layout_constraintTop_toBottomOf="@id/item_story" />
+</androidx.constraintlayout.widget.ConstraintLayout>

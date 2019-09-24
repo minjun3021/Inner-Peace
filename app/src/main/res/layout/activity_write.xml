@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -47,6 +47,7 @@
         android:background="@drawable/bg_diary"
         android:backgroundTint="#693ca3"
         android:text="확인"
+        android:id="@+id/write_upload"
         android:textColor="#fff"
         android:textSize="9dp"
         app:layout_constraintBottom_toBottomOf="@id/write_profile"
@@ -267,7 +268,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="6dp"
         android:background="@drawable/bg_soso"
-        android:scaleType="fitXY"
+
         android:src="@drawable/sea"
         android:translationZ="11dp"
         android:visibility="gone"
@@ -299,4 +300,4 @@
         app:layout_constraintRight_toRightOf="@id/write_content"
         app:layout_constraintTop_toBottomOf="@id/write_story"
         app:layout_goneMarginLeft="15dp" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
