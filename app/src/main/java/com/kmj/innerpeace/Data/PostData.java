@@ -5,6 +5,7 @@ public class PostData {
     String title;
     String content;
     String emotion;
+    double emotionScore;
     String imgPath;
     String owner;
     String createAt;
@@ -41,6 +42,14 @@ public class PostData {
 
     public void setEmotion(String emotion) {
         this.emotion = emotion;
+    }
+
+    public double getEmotionScore() {
+        return emotionScore;
+    }
+
+    public void setEmotionScore(double emotionScore) {
+        this.emotionScore = emotionScore;
     }
 
     public String getImgPath() {
@@ -83,11 +92,13 @@ public class PostData {
         this.timeString = timeString;
     }
 
-    public PostData(String _id, String title, String content, String emotion, String imgPath, String owner, String createAt, String __v, String timeString) {
+    public PostData(String _id, String title, String content, String emotion, double emotionScore, String imgPath, String owner, String createAt, String __v, String timeString) {
+
         this._id = _id;
         this.title = title;
         this.content = content;
         this.emotion = emotion;
+        this.emotionScore = emotionScore;
         this.imgPath = imgPath;
         this.owner = owner;
         this.createAt = createAt;

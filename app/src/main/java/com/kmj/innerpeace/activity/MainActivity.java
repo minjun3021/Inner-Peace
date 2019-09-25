@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Fragment> fragments;
     FragmentUtils fragmentUtils;
     ProfileFragment profileFragment;
-    DiaryFragment diaryFragment;
+   static DiaryFragment diaryFragment;
     HomeFragment homeFragment;
     MusicFragment musicFragment;
     PlaylistFragment playlistFragment;
@@ -143,5 +143,8 @@ public class MainActivity extends AppCompatActivity {
             reqPermissionArray = permissions.toArray(reqPermissionArray);
             ActivityCompat.requestPermissions(MainActivity.this, reqPermissionArray, 888);
         }
+    }
+    public static void refresh(){
+        diaryFragment.refresh();
     }
 }

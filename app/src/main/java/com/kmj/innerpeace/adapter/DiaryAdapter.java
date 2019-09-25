@@ -12,13 +12,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.kmj.innerpeace.Data.DiaryData;
 import com.kmj.innerpeace.Data.PostData;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.activity.MainActivity;
+import com.kmj.innerpeace.retrofit.NetworkHelper;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder> {
     ArrayList<PostData> mList;
@@ -32,12 +37,14 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
     public class DiaryViewHolder extends RecyclerView.ViewHolder {
         CircleImageView circleImageView;
         TextView name;
+        Button postDelete;
         TextView time,title,story,check;
         ImageView delete,image;
         Button emotion;
 
         public DiaryViewHolder(@NonNull View v) {
             super(v);
+            this.postDelete=v.findViewById(R.id.item_delete);
             this.circleImageView=v.findViewById(R.id.item_profile);
             this.title=v.findViewById(R.id.item_title);
             this.time=v.findViewById(R.id.item_time);
@@ -45,8 +52,32 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
             this.emotion=v.findViewById(R.id.item_emotion);
             this.name=v.findViewById(R.id.item_name);
             this.story=v.findViewById(R.id.item_story);
-            this.delete=v.findViewById(R.id.item_delete);
             this.check=v.findViewById(R.id.item_check);
+            postDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position=getAdapterPosition();
+
+                    String id=mList.get(position).get_id();
+                    NetworkHelper.getInstance().deletePost(MainActivity.userToken,id).enqueue(new Callback<DiaryData>() {
+                        @Override
+                        public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
+                            if(response.isSuccessful() && response!=null){
+                                mainActivity.refresh();
+                            }
+                            else{
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<DiaryData> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+            });
         }
     }
 
@@ -67,6 +98,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         holder.emotion.setText(temp.getEmotion());
         holder.title.setText(temp.getTitle());
         holder.story.setText(temp.getContent());
+        holder.check.setText("감정지수 : "+Math.round(temp.getEmotionScore()*100)+"%");
         switch (temp.getEmotion()){
             case "매우 나쁨":
                 holder.emotion.setBackgroundResource(R.drawable.button_verybad);

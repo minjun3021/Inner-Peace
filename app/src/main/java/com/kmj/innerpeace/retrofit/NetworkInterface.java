@@ -4,6 +4,7 @@ package com.kmj.innerpeace.retrofit;
 import com.kmj.innerpeace.Data.DiaryData;
 import com.kmj.innerpeace.Data.Diarys;
 import com.kmj.innerpeace.Data.KindOfMusic;
+import com.kmj.innerpeace.Data.PostData;
 import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
@@ -59,4 +60,14 @@ public interface NetworkInterface {
     Call<DiaryData> uploadPost(@Header("Authorization") String token,@Field("title")String title,@Field("content") String content,@Field("emotion")String emotion,@Field("img") String img);
     @GET("/post/getMyPosts")
     Call<Diarys> getMyPosts(@Header("Authorization") String token);
+
+    @POST("/post/delete")
+    @FormUrlEncoded
+    Call<DiaryData> deletePost(@Header("Authorization") String token,@Field("_id") String _id);
+
+    @POST("/post/emotionAnalysis")
+    @FormUrlEncoded
+    Call <PostData> getScore(@Header("Authorization") String token,@Field("_id") String _id);
+
+
 }

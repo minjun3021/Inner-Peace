@@ -7,8 +7,8 @@
     <com.loopeer.shadow.ShadowView
         android:id="@+id/item_content"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="0dp"
 
 
         android:elevation="10dp"
@@ -73,20 +73,25 @@
         app:layout_constraintBottom_toBottomOf="@id/item_profile"
         app:layout_constraintLeft_toLeftOf="@id/item_name" />
 
-    <ImageView
-        android:layout_width="13dp"
-        android:layout_height="13dp"
-        android:layout_marginRight="24dp"
-        android:src="@drawable/ic_threedots"
-        android:tint="#fff"
+
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="22dp"
+        android:background="@drawable/bg_diary"
+        android:stateListAnimator="@null"
+        android:backgroundTint="#fff"
+        android:text="삭제"
+        android:textColor="#121319"
         android:id="@+id/item_delete"
+        android:textSize="9sp"
         android:translationZ="11dp"
         app:layout_constraintBottom_toBottomOf="@id/item_profile"
         app:layout_constraintRight_toRightOf="@id/item_content"
         app:layout_constraintTop_toTopOf="@id/item_profile"
 
-        />
 
+        />
 
     <ImageView
         android:id="@+id/item_image"
@@ -161,6 +166,7 @@
         app:layout_constraintLeft_toLeftOf="@id/item_title"
         app:layout_constraintRight_toRightOf="@id/item_content"
         app:layout_constraintTop_toBottomOf="@id/item_title" />
+
     <TextView
         android:id="@+id/item_check"
         android:layout_width="0dp"

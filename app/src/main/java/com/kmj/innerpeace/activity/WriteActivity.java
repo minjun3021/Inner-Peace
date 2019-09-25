@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.kmj.innerpeace.Data.DiaryData;
+import com.kmj.innerpeace.Data.PostData;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.retrofit.NetworkHelper;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -92,6 +93,22 @@ public class WriteActivity extends AppCompatActivity {
                                         public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
                                             if (response.isSuccessful() && response != null) {
                                                 Toast.makeText(WriteActivity.this, "일기가 작성되었습니다.", Toast.LENGTH_SHORT).show();
+                                                NetworkHelper.getInstance().getScore(MainActivity.userToken,response.body().getData().get_id()).enqueue(new Callback<PostData>() {
+                                                    @Override
+                                                    public void onResponse(Call<PostData> call, Response<PostData> response) {
+                                                        if(response.isSuccessful() && response!=null){
+                                                            MainActivity.refresh();
+                                                        }
+                                                        else{
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<PostData> call, Throwable t) {
+
+                                                    }
+                                                });
                                                 new Handler().postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
