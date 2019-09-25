@@ -90,7 +90,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
             layoutParams.dimensionRatio = "W,1:1";
             holder.emotion.setLayoutParams(layoutParams);
             Glide.with(mainActivity)
-                    .load(temp.getImgPath())
+                    .load("http://3.130.54.219:8000/"+temp.getImgPath())
                     .placeholder(R.drawable.sea)
                     .fitCenter()
                     .into(holder.image);
