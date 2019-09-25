@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.kmj.innerpeace.Data.Diarys;
 import com.kmj.innerpeace.R;
@@ -32,6 +33,7 @@ public class DiaryFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private DiaryAdapter mAdapter;
+    SwipeRefreshLayout swipeRefreshLayout;
     Diarys diarys;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,15 @@ public class DiaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_diary, container, false);
         mainActivity= (MainActivity) getActivity();
+        swipeRefreshLayout=v.findViewById(R.id.diary_swipe);
         create=v.findViewById(R.id.create_diary);
         mRecyclerView=v.findViewById(R.id.diary_recyler);
         mLinearLayoutManager = new LinearLayoutManager(mainActivity);
+        mLinearLayoutManager.setAutoMeasureEnabled(true);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setHasFixedSize(false);
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +62,12 @@ public class DiaryFragment extends Fragment {
             }
         });
         refresh();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
         return v;
     }
     public void refresh(){
@@ -68,14 +81,17 @@ public class DiaryFragment extends Fragment {
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                     Logger.e(response.toString());
+                    swipeRefreshLayout.setRefreshing(false);
                 }
                 else if(response.isSuccessful()){
                     Toast.makeText(mainActivity, "다시 시도하세요", Toast.LENGTH_SHORT).show();
+                    swipeRefreshLayout.setRefreshing(false);
                     Logger.e(response.toString());
                 }
                 else{
                     Toast.makeText(mainActivity, "다시 시도하세요", Toast.LENGTH_SHORT).show();
                     Logger.e(response.toString());
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 

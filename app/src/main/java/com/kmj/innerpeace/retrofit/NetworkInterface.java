@@ -3,6 +3,7 @@ package com.kmj.innerpeace.retrofit;
 
 import com.kmj.innerpeace.Data.DiaryData;
 import com.kmj.innerpeace.Data.Diarys;
+import com.kmj.innerpeace.Data.KindOfMusic;
 import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
@@ -43,6 +44,8 @@ public interface NetworkInterface {
     @POST("/save")
     Call<SaveRes> egg(@Body SendData sendData);
 
+    @POST("/api/v1/emotion")
+    Call<KindOfMusic> sendEEG(@Body SendData sendData);
     @POST("/auth/register")
     @FormUrlEncoded
     Call<RegisterData> register(@Field("email") String email,@Field("password") String password,@Field("name") String name,@Field("phone") String phone);

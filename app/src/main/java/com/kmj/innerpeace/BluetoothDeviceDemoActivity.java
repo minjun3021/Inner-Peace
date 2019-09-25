@@ -75,7 +75,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
 
 
         cnt = 0;
-        sendData = new SendData(label, data);
+       // sendData = new SendData(label, data);
 
 
         NetworkHelper.getInstance().egg(sendData).enqueue(new Callback<SaveRes>() {
@@ -119,7 +119,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
     // TODO connection sdk
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
-    private String address = null;
+    private String address = "C3:3C:01:04:0B:40";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

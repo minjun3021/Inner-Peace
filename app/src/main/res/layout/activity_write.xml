@@ -267,7 +267,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="6dp"
-        android:background="@drawable/bg_soso"
+
 
         android:src="@drawable/sea"
         android:translationZ="11dp"

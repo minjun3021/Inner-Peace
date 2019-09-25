@@ -1,122 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/diary_swipe"
     android:background="#121319"
-    android:clipToPadding="false"
-    tools:context=".fragment.DiaryFragment">
+    tools:context=".fragment.DiaryFragment"
+    >
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/fragment_diary_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="58dp"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="10sp"
-        android:text="ㅁㅁㅁ님"
-        android:textColor="#996ad7"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="9sp"
-        android:text="의"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_diary_name"
-        app:layout_constraintLeft_toRightOf="@id/fragment_diary_name"
-        app:layout_constraintTop_toTopOf="@id/fragment_diary_name" />
-
-    <TextView
-        android:id="@+id/fragment_diary_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="9sp"
-        android:text="하루는 어땠나요?"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="@id/fragment_diary_name"
-        app:layout_constraintTop_toBottomOf="@id/fragment_diary_name" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fragment_diary_myProfile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/ic_profile"
-        android:translationZ="11dp"
-        app:layout_constraintBottom_toBottomOf="@id/create_diary"
-        app:layout_constraintLeft_toLeftOf="@id/create_diary"
-        app:layout_constraintTop_toTopOf="@id/create_diary"
-        app:layout_constraintVertical_bias="0.4"
-
-        />
-
-    <com.loopeer.shadow.ShadowView
-        android:id="@+id/create_diary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="48dp"
-        android:elevation="10dp"
-        app:backgroundColor="#121319"
-        app:cornerRadius="4dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_diary_title"
-        app:shadowColor="#29ffffff"
-        app:shadowMarginBottom="10dp"
-        app:shadowMarginRight="10dp"
-
-        app:shadowRadius="14dp">
-
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="67dp"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
 
-            android:background="@drawable/bg_diary" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:clipToPadding="false">
 
 
-    </com.loopeer.shadow.ShadowView>
+                <TextView
+                    android:id="@+id/fragment_diary_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="58dp"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="10sp"
+                    android:text="ㅁㅁㅁ님"
+                    android:textColor="#996ad7"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:letterSpacing="-0.03"
-        android:lineSpacingExtra="6sp"
-        android:text="당신의 하루를 들려주세요"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:translationZ="11dp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_diary_myProfile"
-        app:layout_constraintLeft_toRightOf="@id/fragment_diary_myProfile"
-        app:layout_constraintTop_toTopOf="@id/fragment_diary_myProfile" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="9sp"
+                    android:text="의"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_diary_name"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_diary_name"
+                    app:layout_constraintTop_toTopOf="@id/fragment_diary_name" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/diary_recyler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="33dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/create_diary"
-        app:layout_constraintRight_toRightOf="@id/create_diary"
-        app:layout_constraintTop_toBottomOf="@id/create_diary"
-        tools:listitem="@layout/diary_item">
+                <TextView
+                    android:id="@+id/fragment_diary_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="9sp"
+                    android:text="하루는 어땠나요?"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toLeftOf="@id/fragment_diary_name"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_diary_name" />
 
-    </androidx.recyclerview.widget.RecyclerView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fragment_diary_myProfile"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_profile"
+                    android:translationZ="11dp"
+                    app:layout_constraintBottom_toBottomOf="@id/create_diary"
+                    app:layout_constraintLeft_toLeftOf="@id/create_diary"
+                    app:layout_constraintTop_toTopOf="@id/create_diary"
+                    app:layout_constraintVertical_bias="0.4"
+
+                    />
+
+                <com.loopeer.shadow.ShadowView
+                    android:id="@+id/create_diary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="48dp"
+                    android:elevation="10dp"
+                    app:backgroundColor="#121319"
+                    app:cornerRadius="4dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_diary_title"
+                    app:shadowColor="#29ffffff"
+                    app:shadowMarginBottom="10dp"
+                    app:shadowMarginRight="10dp"
+
+                    app:shadowRadius="14dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="67dp"
+
+                        android:background="@drawable/bg_diary" />
+
+
+                </com.loopeer.shadow.ShadowView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="6sp"
+                    android:text="당신의 하루를 들려주세요"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:translationZ="11dp"
+                    app:layout_constraintBottom_toBottomOf="@id/fragment_diary_myProfile"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_diary_myProfile"
+                    app:layout_constraintTop_toTopOf="@id/fragment_diary_myProfile" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/diary_recyler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintLeft_toLeftOf="@id/create_diary"
+                    app:layout_constraintRight_toRightOf="@id/create_diary"
+                    app:layout_constraintTop_toBottomOf="@id/create_diary"
+                    tools:listitem="@layout/diary_item">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

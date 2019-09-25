@@ -1,11 +1,10 @@
 package com.kmj.innerpeace.Data;
 
 public class SendData {
-    int label;
-    EEGData data ;
 
-    public SendData(int label, EEGData data) {
-        this.label = label;
+    public EEGData data ;
+
+    public SendData(EEGData data) {
         this.data = data;
     }
 }
