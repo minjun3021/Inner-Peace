@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import gun0912.tedimagepicker.builder.TedImagePicker;
 import gun0912.tedimagepicker.builder.listener.OnSelectedListener;
 import retrofit2.Call;
@@ -45,7 +47,7 @@ import retrofit2.Response;
 
 public class WriteActivity extends AppCompatActivity {
     Button emotion, verygood, good, soso, bad, verybad;
-    ImageView camera, img;
+    ImageView camera, img,back;
     Button upload;
     String e = "";
     ArrayList<String> permissions;
@@ -53,7 +55,8 @@ public class WriteActivity extends AppCompatActivity {
     Boolean havePic = false;
     Boolean havePost = false;
     EditText title, content;
-
+    CircleImageView myProfile;
+    TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +69,20 @@ public class WriteActivity extends AppCompatActivity {
         Logger.addLogAdapter(new AndroidLogAdapter());
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
+        back=findViewById(R.id.write_back);
         emotion = findViewById(R.id.write_emotion);
         verygood = findViewById(R.id.verygimotti);
         permissions = new ArrayList<>();
+        myProfile=findViewById(R.id.write_profile);
+        if (!MainActivity.imgPath.equals("")){
+            Glide.with(WriteActivity.this)
+                    .load(MainActivity.imgPath)
+                    .fitCenter()
+                    .into(myProfile);
+        }
+
+        name=findViewById(R.id.write_name);
+        name.setText(MainActivity.name);
         good = findViewById(R.id.gimotti);
         soso = findViewById(R.id.soso);
         bad = findViewById(R.id.bad);
@@ -78,6 +92,12 @@ public class WriteActivity extends AppCompatActivity {
         title = findViewById(R.id.write_title);
         content = findViewById(R.id.write_story);
         upload = findViewById(R.id.write_upload);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

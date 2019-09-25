@@ -53,6 +53,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
             this.name=v.findViewById(R.id.item_name);
             this.story=v.findViewById(R.id.item_story);
             this.check=v.findViewById(R.id.item_check);
+
             postDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,6 +99,14 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         holder.emotion.setText(temp.getEmotion());
         holder.title.setText(temp.getTitle());
         holder.story.setText(temp.getContent());
+        if (!MainActivity.imgPath.equals("")){
+            Glide.with(mainActivity)
+                    .load(MainActivity.imgPath)
+                    .fitCenter()
+                    .into(holder.circleImageView);
+        }
+        holder.name.setText(MainActivity.name);
+
         holder.check.setText("감정지수 : "+Math.round(temp.getEmotionScore()*100)+"%");
         switch (temp.getEmotion()){
             case "매우 나쁨":

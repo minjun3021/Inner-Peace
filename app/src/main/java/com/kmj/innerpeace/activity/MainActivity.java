@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.kmj.innerpeace.Data.Profile;
 import com.kmj.innerpeace.FragmentUtils;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.fragment.DiaryFragment;
@@ -26,11 +27,16 @@ import com.kmj.innerpeace.fragment.HomeFragment;
 import com.kmj.innerpeace.fragment.MusicFragment;
 import com.kmj.innerpeace.fragment.PlaylistFragment;
 import com.kmj.innerpeace.fragment.ProfileFragment;
+import com.kmj.innerpeace.retrofit.NetworkHelper;
 import com.kmj.innerpeace.util.BackPressCloseHandler;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     BackPressCloseHandler backPressCloseHandler;
     ArrayList<String> permissions;
     public static String userToken;
+    public static String name;
+    public static String imgPath;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -66,7 +74,32 @@ public class MainActivity extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
         SharedPreferences prefs =getSharedPreferences("pref", MODE_PRIVATE);
         userToken = prefs.getString("userToken", "");
+        NetworkHelper.getInstance().getMyProfile(userToken).enqueue(new Callback<Profile>() {
+            @Override
+            public void onResponse(Call<Profile> call, Response<Profile> response) {
+                if(response.isSuccessful()&& response!=null){
 
+                    Logger.e(response.body().getData().getName());
+                    Logger.e(response.body().getData().getImgPath());
+                    name=response.body().getData().getName();
+                    if(!response.body().getData().getImgPath().equals("")){
+                        imgPath="http://3.130.54.219:8000/"+response.body().getData().getImgPath();
+                    }
+                    else{
+                        imgPath="";
+                    }
+
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Profile> call, Throwable t) {
+
+            }
+        });
         fragments = new ArrayList<>();
         permissions = new ArrayList<>();
         profileFragment = new ProfileFragment();

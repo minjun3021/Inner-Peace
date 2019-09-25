@@ -5,6 +5,7 @@ import com.kmj.innerpeace.Data.DiaryData;
 import com.kmj.innerpeace.Data.Diarys;
 import com.kmj.innerpeace.Data.KindOfMusic;
 import com.kmj.innerpeace.Data.PostData;
+import com.kmj.innerpeace.Data.Profile;
 import com.kmj.innerpeace.Data.RegisterData;
 import com.kmj.innerpeace.Data.SaveRes;
 import com.kmj.innerpeace.Data.SendData;
@@ -68,6 +69,9 @@ public interface NetworkInterface {
     @POST("/post/emotionAnalysis")
     @FormUrlEncoded
     Call <PostData> getScore(@Header("Authorization") String token,@Field("_id") String _id);
+
+    @POST("/auth/getProfile")
+    Call<Profile> getMyProfile(@Header("Authorization") String token);
 
 
 }

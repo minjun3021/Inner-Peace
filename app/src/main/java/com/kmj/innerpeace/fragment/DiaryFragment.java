@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.kmj.innerpeace.Data.Diarys;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.activity.MainActivity;
@@ -23,6 +25,7 @@ import com.orhanobut.logger.Logger;
 
 import java.util.Collections;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +37,8 @@ public class DiaryFragment extends Fragment {
     private LinearLayoutManager mLinearLayoutManager;
     private DiaryAdapter mAdapter;
     SwipeRefreshLayout swipeRefreshLayout;
+    CircleImageView myProfile;
+    TextView name;
     Diarys diarys;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,17 @@ public class DiaryFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setHasFixedSize(false);
+
+        myProfile=v.findViewById(R.id.fragment_diary_myProfile);
+        if (!MainActivity.imgPath.equals("")){
+            Glide.with(mainActivity)
+                    .load(MainActivity.imgPath)
+                    .fitCenter()
+                    .into(myProfile);
+        }
+
+        name=v.findViewById(R.id.fragment_diary_name);
+        name.setText(MainActivity.name+"님");
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override

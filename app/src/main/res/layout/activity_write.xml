@@ -12,6 +12,7 @@
         android:layout_width="7dp"
         android:layout_height="12dp"
         android:layout_marginTop="26dp"
+
         android:src="@drawable/ic_back"
         app:layout_constraintLeft_toLeftOf="@id/write_content"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,20 +35,20 @@
         android:lineSpacingExtra="8sp"
         android:text="김민준"
         android:textColor="#ffffff"
-
+        android:id="@+id/write_name"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@id/write_profile"
         app:layout_constraintLeft_toRightOf="@id/write_profile"
         app:layout_constraintTop_toTopOf="@id/write_profile" />
 
     <Button
+        android:id="@+id/write_upload"
         android:layout_width="54dp"
         android:layout_height="25dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/bg_diary"
         android:backgroundTint="#693ca3"
         android:text="확인"
-        android:id="@+id/write_upload"
         android:textColor="#fff"
         android:textSize="9dp"
         app:layout_constraintBottom_toBottomOf="@id/write_profile"
