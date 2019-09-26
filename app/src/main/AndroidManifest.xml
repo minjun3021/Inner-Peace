@@ -24,7 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.ChildActivity"></activity>
+        <activity android:name=".activity.ParentregisterActivity" />
+        <activity android:name=".activity.SettingActivity" />
         <activity
             android:name=".activity.WriteActivity"
             android:screenOrientation="portrait"

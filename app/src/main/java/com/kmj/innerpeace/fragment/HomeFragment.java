@@ -76,19 +76,21 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    TextView text1,text2,text3,textConnecting;
+
+    TextView text1, text2, text3, textConnecting;
     ShadowView shadowView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        text1=v.findViewById(R.id.home_text1);
-        text2=v.findViewById(R.id.home_text2);
-        text3=v.findViewById(R.id.home_text3);
-        textConnecting=v.findViewById(R.id.home_connectingtext);
-        shadowView=v.findViewById(R.id.home_box);
+        text1 = v.findViewById(R.id.home_text1);
+        text2 = v.findViewById(R.id.home_text2);
+        text3 = v.findViewById(R.id.home_text3);
+        textConnecting = v.findViewById(R.id.home_connectingtext);
+        shadowView = v.findViewById(R.id.home_box);
 
-        name=v.findViewById(R.id.home_name);
-        name.setText(MainActivity.name+"님");
+        name = v.findViewById(R.id.home_name);
+        name.setText(MainActivity.name + "님");
         mainActivity = (MainActivity) getActivity();
 
 
@@ -97,33 +99,37 @@ public class HomeFragment extends Fragment {
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    // TODO
-                    mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                    if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-                        Toast.makeText(mainActivity,"블루투스를 켜주세요", Toast.LENGTH_SHORT).show();
+                if (MainActivity.isParentAccount == 1) {
+                    Toast.makeText(mainActivity, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                } else {
 
-                        return;
-                    }
-                    else{
-                        theta.clear();
-                        lowAlpha.clear();
-                        highAlpha.clear();
-                        lowBeta.clear();
-                        highBeta.clear();
-                        lowGamma.clear();
-                        middleGamma.clear();
-                        delta.clear();
-                        badPacketCount = 0;
-                        start();
-                    }
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    Log.i(TAG, "error:" + e.getMessage());
 
+                    try {
+                        // TODO
+                        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+                            Toast.makeText(mainActivity, "블루투스를 켜주세요", Toast.LENGTH_SHORT).show();
+
+                            return;
+                        } else {
+                            theta.clear();
+                            lowAlpha.clear();
+                            highAlpha.clear();
+                            lowBeta.clear();
+                            highBeta.clear();
+                            lowGamma.clear();
+                            middleGamma.clear();
+                            delta.clear();
+                            badPacketCount = 0;
+                            start();
+                        }
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                        Log.i(TAG, "error:" + e.getMessage());
+
+                    }
                 }
-
             }
         });
 
@@ -200,7 +206,7 @@ public class HomeFragment extends Fragment {
                     text2.setVisibility(View.VISIBLE);
                     text3.setVisibility(View.VISIBLE);
                     shadowView.setVisibility(View.VISIBLE);
-                    cnt=0;
+                    cnt = 0;
                     //get data time out
                     break;
                 case ConnectionStates.STATE_COMPLETE:
@@ -212,7 +218,7 @@ public class HomeFragment extends Fragment {
                     text2.setVisibility(View.VISIBLE);
                     text3.setVisibility(View.VISIBLE);
                     shadowView.setVisibility(View.VISIBLE);
-                    cnt=0;
+                    cnt = 0;
                     break;
                 case ConnectionStates.STATE_DISCONNECTED:
                     textConnecting.setVisibility(View.GONE);
@@ -220,7 +226,7 @@ public class HomeFragment extends Fragment {
                     text2.setVisibility(View.VISIBLE);
                     text3.setVisibility(View.VISIBLE);
                     shadowView.setVisibility(View.VISIBLE);
-                    cnt=0;
+                    cnt = 0;
                     break;
                 case ConnectionStates.STATE_ERROR:
                     textConnecting.setVisibility(View.GONE);
@@ -228,7 +234,7 @@ public class HomeFragment extends Fragment {
                     text2.setVisibility(View.VISIBLE);
                     text3.setVisibility(View.VISIBLE);
                     shadowView.setVisibility(View.VISIBLE);
-                    cnt=0;
+                    cnt = 0;
                     Log.d(TAG, "Connect error, Please try again!");
                     break;
 
@@ -351,7 +357,7 @@ public class HomeFragment extends Fragment {
                         text3.setVisibility(View.GONE);
                         shadowView.setVisibility(View.GONE);
                         cnt++;
-                        textConnecting.setText("결과를 측정 중 입니다.  "+String.valueOf(30-cnt)+" left ...");
+                        textConnecting.setText("결과를 측정 중 입니다.  " + String.valueOf(30 - cnt) + " left ...");
                         delta.add(power.delta);
                         theta.add(power.theta);
                         lowAlpha.add(power.lowAlpha);
@@ -374,13 +380,13 @@ public class HomeFragment extends Fragment {
                                 tgStreamReader.stop();
                             }
                             data = new EEGData(delta, theta, lowAlpha, highAlpha, lowBeta, highBeta, lowGamma, middleGamma);
-                            sendData=new SendData(data);
+                            sendData = new SendData(data);
                             Logger.e(String.valueOf(sendData.data.delta.size()));
 
-                            NetworkHelper.getInstance().sendEEG(sendData).enqueue(new retrofit2.Callback<KindOfMusic>() {
+                            NetworkHelper.getInstance().sendEEG(MainActivity.userToken, sendData).enqueue(new retrofit2.Callback<KindOfMusic>() {
                                 @Override
                                 public void onResponse(Call<KindOfMusic> call, Response<KindOfMusic> response) {
-                                    if(response.isSuccessful() && response!=null){
+                                    if (response.isSuccessful() && response != null) {
                                         Logger.e(String.valueOf(response.body().getData()));
                                         theta.clear();
                                         lowAlpha.clear();
@@ -390,8 +396,7 @@ public class HomeFragment extends Fragment {
                                         lowGamma.clear();
                                         middleGamma.clear();
                                         delta.clear();
-                                    }
-                                    else{
+                                    } else {
                                         Logger.e(response.toString());
                                         theta.clear();
                                         lowAlpha.clear();
@@ -409,8 +414,8 @@ public class HomeFragment extends Fragment {
 
                                 }
                             });
-                            Log.e("ohmygod","gimotti");
-                            cnt=0;
+                            Log.e("ohmygod", "gimotti");
+                            cnt = 0;
 
                         }
                     }

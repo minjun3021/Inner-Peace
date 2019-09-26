@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121319"
+    tools:context=".activity.ChildActivity">
+
+    <ImageView
+        android:id="@+id/childlogin_img"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/ic_splash"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <TextView
+        android:id="@+id/childlogin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:letterSpacing="-0.05"
+        android:lineSpacingExtra="7sp"
+        android:text="자녀의 계정을 입력해주세요."
+        android:textColor="#CCffffff"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_img" />
+
+    <TextView
+        android:id="@+id/childlogin_idtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="Email"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+
+        app:layout_constraintLeft_toLeftOf="@id/childlogin_id"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_title"
+
+        />
+
+    <EditText
+        android:id="@+id/childlogin_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="72dp"
+        android:backgroundTint="#fff"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#CCffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_idtext" />
+
+    <TextView
+        android:id="@+id/childlogin_pwtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="6sp"
+        android:text="Password"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintLeft_toLeftOf="@id/childlogin_idtext"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_id"
+
+        />
+
+    <EditText
+        android:id="@+id/childlogin_pw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="72dp"
+        android:backgroundTint="#fff"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#CCffffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_pwtext" />
+
+
+    <Button
+        android:id="@+id/childlogin_btn"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="55dp"
+        android:background="@drawable/bg_login_btn"
+        android:elevation="1dp"
+        android:text="자녀 등록"
+
+        android:textColor="#fff"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/childlogin_id"
+        app:layout_constraintRight_toRightOf="@id/childlogin_id"
+        app:layout_constraintTop_toBottomOf="@id/childlogin_pw" />
+</androidx.constraintlayout.widget.ConstraintLayout>

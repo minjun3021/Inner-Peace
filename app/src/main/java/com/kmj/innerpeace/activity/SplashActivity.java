@@ -22,16 +22,68 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
     String userToken;
+    String childToken;
+    int isParent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        SharedPreferences prefs =getSharedPreferences("pref", MODE_PRIVATE);
-        userToken=prefs.getString("userToken", "");
+        SharedPreferences pref =getSharedPreferences("pref", MODE_PRIVATE);
+        isParent=pref.getInt("isParent",0);
+        userToken=pref.getString("userToken", "");
+        childToken=pref.getString("ChildToken","");
         setup();
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
 
-        if (pref.getString("userToken","").equals("")){
+        if(isParent==1 &&childToken.equals("")){
+            Logger.e("1");
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if(isParent==1 && !childToken.equals("")){
+            Logger.e("2");
+            userToken=childToken;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    NetworkHelper.getInstance().getMyProfile(userToken).enqueue(new Callback<Profile>() {
+                        @Override
+                        public void onResponse(Call<Profile> call, Response<Profile> response) {
+                            if(response.isSuccessful()&& response!=null){
+
+                                Logger.e(response.body().getData().getName());
+                                Logger.e(response.body().getData().getImgPath());
+                                MainActivity.name=response.body().getData().getName();
+                                MainActivity.email=response.body().getData().getEmail();
+                                MainActivity.phone=response.body().getData().getPhone();
+                                if(!response.body().getData().getImgPath().equals("")){
+                                    MainActivity.imgPath="http://34.84.240.128:8000/"+response.body().getData().getImgPath();
+
+                                }
+                                else{
+                                    MainActivity.imgPath="";
+                                }
+
+
+                            }else{
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Profile> call, Throwable t) {
+
+                        }
+                    });
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+
+                    startActivity(intent);
+                    finish();
+                }
+            }, 2000);
+        }
+        else if (pref.getString("userToken","").equals("")){
+            Logger.e("3");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -45,6 +97,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         else{
+            Logger.e("4");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

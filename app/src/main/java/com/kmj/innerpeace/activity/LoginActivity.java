@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     BackPressCloseHandler backPressCloseHandler;
+    Switch aswitch;
+    Boolean isParent=false;
+    int isParentAccount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +54,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     void setup() {
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        isParentAccount=pref.getInt("isParent",0);
         Window window = getWindow();
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
         Logger.addLogAdapter(new AndroidLogAdapter());
         backPressCloseHandler = new BackPressCloseHandler(this);
-        pref = getSharedPreferences("pref", MODE_PRIVATE);
-        editor = pref.edit();
 
+        editor = pref.edit();
+        aswitch=findViewById(R.id.login_switch);
+        aswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isParent=isChecked;
+            }
+        });
         id = findViewById(R.id.login_id);
         pw = findViewById(R.id.login_pw);
         login = findViewById(R.id.login_btn);
@@ -103,24 +116,42 @@ public class LoginActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
+                if(isParent){
+                    Intent intent = new Intent(LoginActivity.this, ParentregisterActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
     }
 
     void tryLogin() {
+        isParentAccount=pref.getInt("isParent",0);
+        Logger.e(String.valueOf(isParentAccount));
+
         NetworkHelper.getInstance().login(id.getText().toString(),pw.getText().toString()).enqueue(new Callback<RegisterData>() {
             @Override
             public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
                if (response.isSuccessful() && response!=null){
-                   Logger.e(response.body().getData());
-                   editor.putString("userToken",response.body().getData());
-                   editor.commit();
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                   if(isParentAccount==1){
+                       Intent intent=new Intent(LoginActivity.this,ChildActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }
+                   else{
+                       Logger.e(response.body().getData());
+                       editor.putString("userToken",response.body().getData());
+                       editor.commit();
+                       Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }
+
                }
                else{
                    Toast.makeText(LoginActivity.this, "Email 또는 Password가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();

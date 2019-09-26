@@ -44,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
     FragmentUtils fragmentUtils;
     ProfileFragment profileFragment;
     static DiaryFragment diaryFragment;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     HomeFragment homeFragment;
     MusicFragment musicFragment;
     PlaylistFragment playlistFragment;
     BackPressCloseHandler backPressCloseHandler;
     ArrayList<String> permissions;
+    public static int isParentAccount=0;
     public static String userToken;
     public static String name;
     public static String imgPath;
@@ -80,13 +83,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setup() {
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
+        isParentAccount=pref.getInt("isParent",0);
         Window window = getWindow();
         Logger.addLogAdapter(new AndroidLogAdapter());
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
         backPressCloseHandler = new BackPressCloseHandler(this);
         SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
-        userToken = prefs.getString("userToken", "");
+        if (isParentAccount==1){
+            userToken=prefs.getString("ChildToken", "");
+        }
+        else{
+            userToken = prefs.getString("userToken", "");
+
+        }
         NetworkHelper.getInstance().getMyProfile(userToken).enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
@@ -140,13 +151,25 @@ public class MainActivity extends AppCompatActivity {
                         fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 1, new Bundle());
                         return true;
                     case R.id.bottom_home:
+
                         fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 2, new Bundle());
                         return true;
                     case R.id.bottom_music:
-                        fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 3, new Bundle());
+                        if (isParentAccount==1){
+                            Toast.makeText(MainActivity.this, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 3, new Bundle());
+
+                        }
                         return true;
                     case R.id.bottom_playlist:
-                        fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 4, new Bundle());
+                        if (isParentAccount==1){
+                            Toast.makeText(MainActivity.this, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                        }else{
+                            fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 4, new Bundle());
+
+                        }
                         return true;
                 }
                 return false;

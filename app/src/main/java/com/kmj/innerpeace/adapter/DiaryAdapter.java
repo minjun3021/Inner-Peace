@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,44 +39,47 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         CircleImageView circleImageView;
         TextView name;
         Button postDelete;
-        TextView time,title,story,check;
-        ImageView delete,image;
+        TextView time, title, story, check;
+        ImageView delete, image;
         Button emotion;
 
         public DiaryViewHolder(@NonNull View v) {
             super(v);
-            this.postDelete=v.findViewById(R.id.item_delete);
-            this.circleImageView=v.findViewById(R.id.item_profile);
-            this.title=v.findViewById(R.id.item_title);
-            this.time=v.findViewById(R.id.item_time);
-            this.image=v.findViewById(R.id.item_image);
-            this.emotion=v.findViewById(R.id.item_emotion);
-            this.name=v.findViewById(R.id.item_name);
-            this.story=v.findViewById(R.id.item_story);
-            this.check=v.findViewById(R.id.item_check);
+            this.postDelete = v.findViewById(R.id.item_delete);
+            this.circleImageView = v.findViewById(R.id.item_profile);
+            this.title = v.findViewById(R.id.item_title);
+            this.time = v.findViewById(R.id.item_time);
+            this.image = v.findViewById(R.id.item_image);
+            this.emotion = v.findViewById(R.id.item_emotion);
+            this.name = v.findViewById(R.id.item_name);
+            this.story = v.findViewById(R.id.item_story);
+            this.check = v.findViewById(R.id.item_check);
 
             postDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position=getAdapterPosition();
+                    if (MainActivity.isParentAccount == 1) {
+                        Toast.makeText(mainActivity, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int position = getAdapterPosition();
 
-                    String id=mList.get(position).get_id();
-                    NetworkHelper.getInstance().deletePost(MainActivity.userToken,id).enqueue(new Callback<DiaryData>() {
-                        @Override
-                        public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
-                            if(response.isSuccessful() && response!=null){
-                                mainActivity.refresh();
+                        String id = mList.get(position).get_id();
+                        NetworkHelper.getInstance().deletePost(MainActivity.userToken, id).enqueue(new Callback<DiaryData>() {
+                            @Override
+                            public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
+                                if (response.isSuccessful() && response != null) {
+                                    mainActivity.refresh();
+                                } else {
+
+                                }
                             }
-                            else{
+
+                            @Override
+                            public void onFailure(Call<DiaryData> call, Throwable t) {
 
                             }
-                        }
-
-                        @Override
-                        public void onFailure(Call<DiaryData> call, Throwable t) {
-
-                        }
-                    });
+                        });
+                    }
 
                 }
             });
@@ -94,12 +98,12 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
 
     @Override
     public void onBindViewHolder(@NonNull DiaryViewHolder holder, int i) {
-        PostData temp=mList.get(i);
+        PostData temp = mList.get(i);
         holder.time.setText(temp.getTimeString());
         holder.emotion.setText(temp.getEmotion());
         holder.title.setText(temp.getTitle());
         holder.story.setText(temp.getContent());
-        if (!MainActivity.imgPath.equals("")){
+        if (!MainActivity.imgPath.equals("")) {
             Glide.with(mainActivity)
                     .load(MainActivity.imgPath)
                     .placeholder(R.drawable.ic_profile)
@@ -108,8 +112,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         }
         holder.name.setText(MainActivity.name);
 
-        holder.check.setText("감정지수 : "+Math.round(temp.getEmotionScore()*100)+"%");
-        switch (temp.getEmotion()){
+        holder.check.setText("감정지수 : " + Math.round(temp.getEmotionScore() * 100) + "%");
+        switch (temp.getEmotion()) {
             case "매우 나쁨":
                 holder.emotion.setBackgroundResource(R.drawable.button_verybad);
                 break;
@@ -126,19 +130,18 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
                 holder.emotion.setBackgroundResource(R.drawable.button_verygood);
                 break;
         }
-        if(!temp.getImgPath().equals("")){
+        if (!temp.getImgPath().equals("")) {
             holder.image.setVisibility(View.VISIBLE);
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) holder.emotion.getLayoutParams();
             layoutParams.dimensionRatio = "W,1:1";
             holder.emotion.setLayoutParams(layoutParams);
             Glide.with(mainActivity)
-                    .load("http://34.84.240.128:8000/"+temp.getImgPath())
+                    .load("http://34.84.240.128:8000/" + temp.getImgPath())
                     .placeholder(R.drawable.sea)
 
                     .fitCenter()
                     .into(holder.image);
         }
-
 
 
     }

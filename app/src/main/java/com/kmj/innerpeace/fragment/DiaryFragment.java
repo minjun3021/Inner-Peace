@@ -79,8 +79,14 @@ public class DiaryFragment extends Fragment {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mainActivity, WriteActivity.class);
-                mainActivity.startActivityForResult(intent,123);
+                if(MainActivity.isParentAccount==1){
+                    Toast.makeText(mainActivity, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent=new Intent(mainActivity, WriteActivity.class);
+                    mainActivity.startActivityForResult(intent,123);
+                }
+
             }
         });
         refresh();

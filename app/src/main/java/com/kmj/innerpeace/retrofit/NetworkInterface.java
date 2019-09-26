@@ -47,7 +47,7 @@ public interface NetworkInterface {
     Call<SaveRes> egg(@Body SendData sendData);
 
     @POST("/api/v1/emotion")
-    Call<KindOfMusic> sendEEG(@Body SendData sendData);
+    Call<KindOfMusic> sendEEG(@Header("Authorization") String token,@Body SendData sendData);
     @POST("/auth/register")
     @FormUrlEncoded
     Call<RegisterData> register(@Field("email") String email,@Field("password") String password,@Field("name") String name,@Field("phone") String phone);

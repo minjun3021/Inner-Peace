@@ -13,6 +13,7 @@
         android:layout_height="105dp"
         android:layout_marginTop="85dp"
         android:src="@drawable/ic_splash"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,13 +53,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="72dp"
 
-        android:textColorHint="#CCffffff"
         android:backgroundTint="#fff"
-
         android:maxLength="20"
+
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="#CCffffff"
+        android:textColorHint="#CCffffff"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_idtext" />
@@ -139,4 +140,31 @@
         app:layout_constraintLeft_toRightOf="@id/login_registertitle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_btn" />
+
+    <TextView
+        android:id="@+id/login_parent_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:letterSpacing="0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="Parent?"
+        android:textColor="#4Dffffff"
+        android:textSize="8sp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/login_switch"
+        app:layout_constraintTop_toBottomOf="@id/login_registertitle" />
+
+    <Switch
+        android:id="@+id/login_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/login_parent_text"
+        app:layout_constraintLeft_toRightOf="@id/login_parent_text"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="@id/login_parent_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

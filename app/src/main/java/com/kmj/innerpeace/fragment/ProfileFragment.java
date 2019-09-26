@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -55,8 +56,15 @@ public class ProfileFragment extends Fragment {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(MainActivity.isParentAccount==1){
+                    Toast.makeText(mainActivity, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
                 Intent intent=new Intent(mainActivity, SettingActivity.class);
                 mainActivity.startActivityForResult(intent,321);
+                }
+
             }
         });
         info1=v.findViewById(R.id.profile_info1);
