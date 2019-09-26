@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 321) {
             Logger.e("letsgo");
             profileFragment.profileRefresh();
+            profileFragment.setInfoStress();
 
         }
         else {

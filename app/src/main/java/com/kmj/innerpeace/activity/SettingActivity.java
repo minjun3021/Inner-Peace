@@ -1,5 +1,6 @@
 package com.kmj.innerpeace.activity;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,11 +43,13 @@ public class SettingActivity extends AppCompatActivity {
     Button stress1, stress2, stress3, stress4, stress5, stress6, stress7, stress8, stress9, stress10, stress11, stress12;
     Button cancel, ok;
     CircleImageView myProfile;
+
     ImageView back;
     TextView name, phone, email, mainname;
-    int[] info=new int[13];
-    int[] stress=new int[13];
-
+    int[] info = new int[13];
+    int[] stress = new int[13];
+    String infoArray[] = {"유아", "초등학생", "중학생", "고등학생", "직장인", "취준생", "성인", "청소년", "남자", "여자", "백수", "기타"};
+    String stressArray[] = {"인간관계", "학업", "여가", "연애", "부담감", "압박감", "진학", "취업", "가족", "직장", "통학", "기타"};
 
 
     @Override
@@ -148,20 +151,19 @@ public class SettingActivity extends AppCompatActivity {
         info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[1]==1){
-                    info[1]=0;
+                if (info[1] == 1) {
+                    info[1] = 0;
                     info1.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info1.setBackgroundResource(R.drawable.button_soso);
-                        info[1]=1;
+                        info[1] = 1;
                     }
                 }
 
@@ -170,20 +172,19 @@ public class SettingActivity extends AppCompatActivity {
         info2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[2]==1){
-                    info[2]=0;
+                if (info[2] == 1) {
+                    info[2] = 0;
                     info2.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info2.setBackgroundResource(R.drawable.button_soso);
-                        info[2]=1;
+                        info[2] = 1;
                     }
                 }
 
@@ -192,20 +193,19 @@ public class SettingActivity extends AppCompatActivity {
         info3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[3]==1){
-                    info[3]=0;
+                if (info[3] == 1) {
+                    info[3] = 0;
                     info3.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info3.setBackgroundResource(R.drawable.button_soso);
-                        info[3]=1;
+                        info[3] = 1;
                     }
                 }
 
@@ -214,20 +214,19 @@ public class SettingActivity extends AppCompatActivity {
         info4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[4]==1){
-                    info[4]=0;
+                if (info[4] == 1) {
+                    info[4] = 0;
                     info4.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info4.setBackgroundResource(R.drawable.button_soso);
-                        info[4]=1;
+                        info[4] = 1;
                     }
                 }
 
@@ -236,20 +235,19 @@ public class SettingActivity extends AppCompatActivity {
         info5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[5]==1){
-                    info[5]=0;
+                if (info[5] == 1) {
+                    info[5] = 0;
                     info5.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info5.setBackgroundResource(R.drawable.button_soso);
-                        info[5]=1;
+                        info[5] = 1;
                     }
                 }
 
@@ -258,20 +256,19 @@ public class SettingActivity extends AppCompatActivity {
         info6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[6]==1){
-                    info[6]=0;
+                if (info[6] == 1) {
+                    info[6] = 0;
                     info6.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info6.setBackgroundResource(R.drawable.button_soso);
-                        info[6]=1;
+                        info[6] = 1;
                     }
                 }
 
@@ -280,21 +277,20 @@ public class SettingActivity extends AppCompatActivity {
         info7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[7]==1){
-                    info[7]=0;
+                if (info[7] == 1) {
+                    info[7] = 0;
                     info7.setBackgroundResource(R.drawable.button_noselected);
 
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info7.setBackgroundResource(R.drawable.button_soso);
-                        info[7]=1;
+                        info[7] = 1;
                     }
                 }
 
@@ -303,20 +299,19 @@ public class SettingActivity extends AppCompatActivity {
         info8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[8]==1){
-                    info[8]=0;
+                if (info[8] == 1) {
+                    info[8] = 0;
                     info8.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info8.setBackgroundResource(R.drawable.button_soso);
-                        info[8]=1;
+                        info[8] = 1;
                     }
                 }
 
@@ -325,20 +320,19 @@ public class SettingActivity extends AppCompatActivity {
         info9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[9]==1){
-                    info[9]=0;
+                if (info[9] == 1) {
+                    info[9] = 0;
                     info9.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info9.setBackgroundResource(R.drawable.button_soso);
-                        info[9]=1;
+                        info[9] = 1;
                     }
                 }
 
@@ -347,20 +341,19 @@ public class SettingActivity extends AppCompatActivity {
         info10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[10]==1){
-                    info[10]=0;
+                if (info[10] == 1) {
+                    info[10] = 0;
                     info10.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info10.setBackgroundResource(R.drawable.button_soso);
-                        info[10]=1;
+                        info[10] = 1;
                     }
                 }
 
@@ -369,20 +362,19 @@ public class SettingActivity extends AppCompatActivity {
         info11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[11]==1){
-                    info[11]=0;
+                if (info[11] == 1) {
+                    info[11] = 0;
                     info11.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info11.setBackgroundResource(R.drawable.button_soso);
-                        info[11]=1;
+                        info[11] = 1;
                     }
                 }
 
@@ -391,20 +383,19 @@ public class SettingActivity extends AppCompatActivity {
         info12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(info[12]==1){
-                    info[12]=0;
+                if (info[12] == 1) {
+                    info[12] = 0;
                     info12.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:info){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : info) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         info12.setBackgroundResource(R.drawable.button_soso);
-                        info[12]=1;
+                        info[12] = 1;
                     }
                 }
 
@@ -416,20 +407,19 @@ public class SettingActivity extends AppCompatActivity {
         stress1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[1]==1){
-                    stress[1]=0;
+                if (stress[1] == 1) {
+                    stress[1] = 0;
                     stress1.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress1.setBackgroundResource(R.drawable.button_soso);
-                        stress[1]=1;
+                        stress[1] = 1;
                     }
                 }
 
@@ -438,19 +428,18 @@ public class SettingActivity extends AppCompatActivity {
         stress2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[2]==1){
-                    stress[2]=0;
+                if (stress[2] == 1) {
+                    stress[2] = 0;
                     stress2.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
-                        stress[2]=1;
+                    } else if (sum <= 3) {
+                        stress[2] = 1;
                         stress2.setBackgroundResource(R.drawable.button_soso);
                     }
                 }
@@ -460,19 +449,18 @@ public class SettingActivity extends AppCompatActivity {
         stress3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[3]==1){
-                    stress[3]=0;
+                if (stress[3] == 1) {
+                    stress[3] = 0;
                     stress3.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
-                        stress[3]=1;
+                    } else if (sum <= 3) {
+                        stress[3] = 1;
                         stress3.setBackgroundResource(R.drawable.button_soso);
                     }
                 }
@@ -482,20 +470,19 @@ public class SettingActivity extends AppCompatActivity {
         stress4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[4]==1){
-                    stress[4]=0;
+                if (stress[4] == 1) {
+                    stress[4] = 0;
                     stress4.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress4.setBackgroundResource(R.drawable.button_soso);
-                        stress[4]=1;
+                        stress[4] = 1;
                     }
                 }
 
@@ -504,19 +491,18 @@ public class SettingActivity extends AppCompatActivity {
         stress5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[5]==1){
-                    stress[5]=0;
+                if (stress[5] == 1) {
+                    stress[5] = 0;
                     stress5.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
-                        stress[5]=1;
+                    } else if (sum <= 3) {
+                        stress[5] = 1;
                         stress5.setBackgroundResource(R.drawable.button_soso);
                     }
                 }
@@ -526,20 +512,19 @@ public class SettingActivity extends AppCompatActivity {
         stress6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[6]==1){
-                    stress[6]=0;
+                if (stress[6] == 1) {
+                    stress[6] = 0;
                     stress6.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress6.setBackgroundResource(R.drawable.button_soso);
-                        stress[6]=1;
+                        stress[6] = 1;
                     }
                 }
 
@@ -548,20 +533,19 @@ public class SettingActivity extends AppCompatActivity {
         stress7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[7]==1){
-                    stress[7]=0;
+                if (stress[7] == 1) {
+                    stress[7] = 0;
                     stress7.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress7.setBackgroundResource(R.drawable.button_soso);
-                        stress[7]=1;
+                        stress[7] = 1;
                     }
                 }
 
@@ -570,20 +554,19 @@ public class SettingActivity extends AppCompatActivity {
         stress8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[8]==1){
-                    stress[8]=0;
+                if (stress[8] == 1) {
+                    stress[8] = 0;
                     stress8.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress8.setBackgroundResource(R.drawable.button_soso);
-                        stress[8]=1;
+                        stress[8] = 1;
                     }
                 }
 
@@ -592,20 +575,19 @@ public class SettingActivity extends AppCompatActivity {
         stress9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[9]==1){
-                    stress[9]=0;
+                if (stress[9] == 1) {
+                    stress[9] = 0;
                     stress9.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress9.setBackgroundResource(R.drawable.button_soso);
-                        stress[9]=1;
+                        stress[9] = 1;
                     }
                 }
 
@@ -614,20 +596,19 @@ public class SettingActivity extends AppCompatActivity {
         stress10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[10]==1){
-                    stress[10]=0;
+                if (stress[10] == 1) {
+                    stress[10] = 0;
                     stress10.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress10.setBackgroundResource(R.drawable.button_soso);
-                        stress[10]=1;
+                        stress[10] = 1;
                     }
                 }
 
@@ -636,20 +617,19 @@ public class SettingActivity extends AppCompatActivity {
         stress11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[11]==1){
-                    stress[11]=0;
+                if (stress[11] == 1) {
+                    stress[11] = 0;
                     stress11.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress11.setBackgroundResource(R.drawable.button_soso);
-                        stress[11]=1;
+                        stress[11] = 1;
                     }
                 }
 
@@ -658,20 +638,19 @@ public class SettingActivity extends AppCompatActivity {
         stress12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(stress[12]==1){
-                    stress[12]=0;
+                if (stress[12] == 1) {
+                    stress[12] = 0;
                     stress12.setBackgroundResource(R.drawable.button_noselected);
-                }
-                else{
-                    int sum=0;
-                    for(int i:stress){
-                        sum+=i;
+                } else {
+                    int sum = 0;
+                    for (int i : stress) {
+                        sum += i;
                     }
-                    if(sum>=3){
+                    if (sum >= 3) {
                         return;
-                    }else if(sum<=3){
+                    } else if (sum <= 3) {
                         stress12.setBackgroundResource(R.drawable.button_soso);
-                        stress[12]=1;
+                        stress[12] = 1;
                     }
                 }
 
@@ -692,6 +671,44 @@ public class SettingActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                int sum = 0;
+                for (int i : info) {
+                    sum += i;
+                }
+                if (sum != 0) {
+                    String infoString = "";
+                    int index = -1;
+                    for (int i : info) {
+                        if (i == 1) {
+                            infoString += infoArray[index] + ":";
+
+                        }
+                        index++;
+                    }
+                    Logger.e(infoString);
+                    editor.putString("infoString", infoString);
+                    editor.commit();
+                }
+                sum = 0;
+                for (int i : stress) {
+                    sum += i;
+                }
+                if (sum != 0) {
+                    String stressString = "";
+
+                    int index = -1;
+                    for (int i : stress) {
+                        if (i == 1) {
+                            stressString += stressArray[index] + ":";
+                        }
+                        index++;
+                    }
+                    Logger.e(stressString);
+                    editor.putString("stressString", stressString);
+                    editor.commit();
+                }
                 if (!encodedString.equals("")) {
                     new Thread(new Runnable() {
                         @Override
@@ -721,8 +738,7 @@ public class SettingActivity extends AppCompatActivity {
                             });
                         }
                     }, 500);
-                }
-                else {
+                } else {
                     //TODO 저장
                     finish();
                 }
