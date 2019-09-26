@@ -3,6 +3,8 @@ package com.kmj.innerpeace.retrofit;
 
 import com.kmj.innerpeace.Data.DiaryData;
 import com.kmj.innerpeace.Data.Diarys;
+import com.kmj.innerpeace.Data.EmotionAvg;
+import com.kmj.innerpeace.Data.EmotionCount;
 import com.kmj.innerpeace.Data.KindOfMusic;
 import com.kmj.innerpeace.Data.PostData;
 import com.kmj.innerpeace.Data.Profile;
@@ -76,6 +78,12 @@ public interface NetworkInterface {
     @POST("/auth/changeProfileImage")
     @FormUrlEncoded
     Call<Profile> ChangeProfile(@Header("Authorization") String token,@Field("img") String img);
+
+    @POST("/post/getMyEmotionAverage")
+    Call<EmotionAvg> getEmotionAvg(@Header("Authorization") String token);
+    @POST("/api/v1/emotionCount")
+    Call<EmotionCount> getEmotionCount(@Header("Authorization") String token);
+
 
 
 }

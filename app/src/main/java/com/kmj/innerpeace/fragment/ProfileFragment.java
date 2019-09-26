@@ -23,14 +23,20 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.kmj.innerpeace.Data.EmotionAvg;
+import com.kmj.innerpeace.Data.EmotionCount;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.activity.MainActivity;
 import com.kmj.innerpeace.activity.SettingActivity;
+import com.kmj.innerpeace.retrofit.NetworkHelper;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -40,7 +46,12 @@ public class ProfileFragment extends Fragment {
     CircleImageView myProfile;
     Button info1,info2,info3,stress1,stress2,stress3;
     TextView name;
-    PieChart pieChart1,pieChart2,pieChart3;
+    PieChart pieChart1,pieChart2;
+    float avg=0;
+
+    int d0 = 0;
+    int d1 = 0;
+    int d2 =0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +86,7 @@ public class ProfileFragment extends Fragment {
         stress3=v.findViewById(R.id.profile_stress3);
         pieChart1=v.findViewById(R.id.piechart1);
         pieChart2=v.findViewById(R.id.piechart2);
-        pieChart3=v.findViewById(R.id.piechart3);
-        setPieChart(1,1,1);
+        setPieChart();
         setInfoStress();
         myProfile=v.findViewById(R.id.profile_profile);
         name=v.findViewById(R.id.fragment_profile_name);
@@ -185,75 +195,88 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void setPieChart(int p1,int p2,int p3){
-        pieChart1.setUsePercentValues(true);
-        pieChart1.getDescription().setEnabled(false);
-        pieChart1.setExtraOffsets(5,10,5,5);
-        pieChart1.setDragDecelerationFrictionCoef(0.95f);
-        pieChart1.setDrawHoleEnabled(false);
-        pieChart1.setHoleColor(Color.WHITE);
-        pieChart1.setTransparentCircleRadius(61f);
-        ArrayList<PieEntry> yValues1 = new ArrayList<PieEntry>();
-        yValues1.add(new PieEntry(40f,"집중O"));
-        yValues1.add(new PieEntry(60f,"집중X"));
-        pieChart1.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
-        PieDataSet dataSet1 = new PieDataSet(yValues1,"");
-        dataSet1.setSliceSpace(3f);
-        dataSet1.setSelectionShift(5f);
-        dataSet1.setColors(ColorTemplate.JOYFUL_COLORS);
-        PieData data1 = new PieData((dataSet1));
-        data1.setValueTextSize(13f);
-        pieChart1.setDrawSliceText(false); // To remove slice text
-        pieChart1.setDrawMarkers(false); // To remove markers when click
-        pieChart1.setDrawEntryLabels(false); // To remove labels from piece of pie
-        pieChart1.getDescription().setEnabled(false); // To remove description of pie
-        pieChart1.setData(data1);
+    public void setPieChart(){
 
-        pieChart2.setUsePercentValues(true);
-        pieChart2.getDescription().setEnabled(false);
-        pieChart2.setExtraOffsets(5,10,5,5);
-        pieChart2.setDragDecelerationFrictionCoef(0.95f);
-        pieChart2.setDrawHoleEnabled(false);
-        pieChart2.setHoleColor(Color.WHITE);
-        pieChart2.setTransparentCircleRadius(61f);
-        ArrayList<PieEntry> yValues2 = new ArrayList<PieEntry>();
-        yValues2.add(new PieEntry(40f,"집중O"));
-        yValues2.add(new PieEntry(60f,"집중X"));
-        pieChart2.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
-        PieDataSet dataSet2 = new PieDataSet(yValues2,"");
-        dataSet2.setSliceSpace(3f);
-        dataSet2.setSelectionShift(5f);
-        dataSet2.setColors(ColorTemplate.JOYFUL_COLORS);
-        PieData data2 = new PieData((dataSet2));
-        data2.setValueTextSize(13f);
-        pieChart2.setDrawSliceText(false); // To remove slice text
-        pieChart2.setDrawMarkers(false); // To remove markers when click
-        pieChart2.setDrawEntryLabels(false); // To remove labels from piece of pie
-        pieChart2.getDescription().setEnabled(false); // To remove description of pie
-        pieChart2.setData(data2);
 
-        pieChart3.setUsePercentValues(true);
-        pieChart3.getDescription().setEnabled(false);
-        pieChart3.setExtraOffsets(5,10,5,5);
-        pieChart3.setDragDecelerationFrictionCoef(0.95f);
-        pieChart3.setDrawHoleEnabled(false);
-        pieChart3.setHoleColor(Color.WHITE);
-        pieChart3.setTransparentCircleRadius(61f);
-        ArrayList<PieEntry> yValues3 = new ArrayList<PieEntry>();
-        yValues3.add(new PieEntry(40f,"집중O"));
-        yValues3.add(new PieEntry(60f,"집중X"));
-        pieChart3.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
-        PieDataSet dataSet3 = new PieDataSet(yValues3,"");
-        dataSet3.setSliceSpace(3f);
-        dataSet3.setSelectionShift(5f);
-        dataSet3.setColors(ColorTemplate.JOYFUL_COLORS);
-        PieData data3 = new PieData((dataSet3));
-        data3.setValueTextSize(13f);
-        pieChart3.setDrawSliceText(false); // To remove slice text
-        pieChart3.setDrawMarkers(false); // To remove markers when click
-        pieChart3.setDrawEntryLabels(false); // To remove labels from piece of pie
-        pieChart3.getDescription().setEnabled(false); // To remove description of pie
-        pieChart3.setData(data3);
+        NetworkHelper.getInstance().getEmotionAvg(MainActivity.userToken).enqueue(new Callback<EmotionAvg>() {
+            @Override
+            public void onResponse(Call<EmotionAvg> call, Response<EmotionAvg> response) {
+                avg= (float) response.body().getData();
+                Logger.e(String.valueOf(avg));
+
+                pieChart1.setUsePercentValues(true);
+                pieChart1.getDescription().setEnabled(false);
+                pieChart1.setExtraOffsets(5,10,5,5);
+                pieChart1.setDragDecelerationFrictionCoef(0.95f);
+                pieChart1.setDrawHoleEnabled(false);
+                pieChart1.setHoleColor(Color.WHITE);
+                pieChart1.setTransparentCircleRadius(61f);
+                ArrayList<PieEntry> yValues1 = new ArrayList<PieEntry>();
+                yValues1.add(new PieEntry(avg*100,"일기 감정"));
+                yValues1.add(new PieEntry(100-avg*100,""));
+                pieChart1.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
+                PieDataSet dataSet1 = new PieDataSet(yValues1,"");
+                dataSet1.setSliceSpace(3f);
+                dataSet1.setSelectionShift(5f);
+                dataSet1.setColors(ColorTemplate.JOYFUL_COLORS);
+                PieData data1 = new PieData((dataSet1));
+                data1.setValueTextSize(13f);
+                pieChart1.setDrawSliceText(false); // To remove slice text
+                pieChart1.setDrawMarkers(false); // To remove markers when click
+                pieChart1.setDrawEntryLabels(false); // To remove labels from piece of pie
+                pieChart1.getDescription().setEnabled(false); // To remove description of pie
+                pieChart1.setData(data1);
+            }
+
+            @Override
+            public void onFailure(Call<EmotionAvg> call, Throwable t) {
+
+            }
+        });
+        NetworkHelper.getInstance().getEmotionCount(MainActivity.userToken).enqueue(new Callback<EmotionCount>() {
+            @Override
+            public void onResponse(Call<EmotionCount> call, Response<EmotionCount> response) {
+                d0=response.body().getData().get(0);
+                d1=response.body().getData().get(1);
+                d2=response.body().getData().get(2);
+                Logger.e(String.valueOf(d0));
+                Logger.e(String.valueOf(d1));
+                Logger.e(String.valueOf(d2));
+                pieChart2.setUsePercentValues(true);
+                pieChart2.getDescription().setEnabled(false);
+                pieChart2.setExtraOffsets(5,10,5,5);
+                pieChart2.setDragDecelerationFrictionCoef(0.95f);
+                pieChart2.setDrawHoleEnabled(false);
+                pieChart2.setHoleColor(Color.WHITE);
+                pieChart2.setTransparentCircleRadius(61f);
+                ArrayList<PieEntry> yValues2 = new ArrayList<PieEntry>();
+                yValues2.add(new PieEntry(d0,"안정"));
+                yValues2.add(new PieEntry(d1,"좋음"));
+                yValues2.add(new PieEntry(d2,"나쁨"));
+                pieChart2.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
+                PieDataSet dataSet2 = new PieDataSet(yValues2,"");
+                dataSet2.setSliceSpace(3f);
+                dataSet2.setSelectionShift(5f);
+                dataSet2.setColors(ColorTemplate.JOYFUL_COLORS);
+                PieData data2 = new PieData((dataSet2));
+                data2.setValueTextSize(13f);
+                pieChart2.setDrawSliceText(false); // To remove slice text
+                pieChart2.setDrawMarkers(false); // To remove markers when click
+                pieChart2.setDrawEntryLabels(false); // To remove labels from piece of pie
+                pieChart2.getDescription().setEnabled(false); // To remove description of pie
+                pieChart2.setData(data2);
+
+            }
+
+            @Override
+            public void onFailure(Call<EmotionCount> call, Throwable t) {
+
+            }
+        });
+
+
+
+
     }
 }
 

@@ -200,7 +200,6 @@ public class HomeFragment extends Fragment {
                     LinkDetectedHandler.sendEmptyMessageDelayed(1234, 5000); //do not
                     break;
                 case ConnectionStates.STATE_GET_DATA_TIME_OUT:
-                    Toast.makeText(mainActivity, "기기와의 연결이 끊겼습니다.", Toast.LENGTH_SHORT).show();
                     textConnecting.setVisibility(View.GONE);
                     text1.setVisibility(View.VISIBLE);
                     text2.setVisibility(View.VISIBLE);
@@ -240,7 +239,10 @@ public class HomeFragment extends Fragment {
 
 
                 case ConnectionStates.STATE_FAILED:
-                    Toast.makeText(mainActivity, "기기와 연결 실패 하였습니다.", Toast.LENGTH_SHORT).show();
+                    text1.setVisibility(View.VISIBLE);
+                    text2.setVisibility(View.VISIBLE);
+                    text3.setVisibility(View.VISIBLE);
+                    shadowView.setVisibility(View.VISIBLE);
                     break;
             }
             Message msg = LinkDetectedHandler.obtainMessage();
@@ -549,5 +551,7 @@ public class HomeFragment extends Fragment {
             }
         }
     };
-
+    void showToast(String s){
+        Toast.makeText(mainActivity, s, Toast.LENGTH_SHORT).show();
+    }
 }
