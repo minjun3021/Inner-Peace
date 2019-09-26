@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -89,31 +90,40 @@ public class HomeFragment extends Fragment {
         name=v.findViewById(R.id.home_name);
         name.setText(MainActivity.name+"님");
         mainActivity = (MainActivity) getActivity();
-        try {
-            // TODO
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-//                Toast.makeText(
-//                        mainActivity,
-//                        "Please enable your Bluetooth and re-run this program !",
-//                        Toast.LENGTH_LONG).show();
 
-//				return;
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            Log.i(TAG, "error:" + e.getMessage());
-
-        }
 
         setup();
         connect = v.findViewById(R.id.home_connect);
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                badPacketCount = 0;
-                start();
+                try {
+                    // TODO
+                    mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+                        Toast.makeText(mainActivity,"블루투스를 켜주세요", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+                    else{
+                        theta.clear();
+                        lowAlpha.clear();
+                        highAlpha.clear();
+                        lowBeta.clear();
+                        highBeta.clear();
+                        lowGamma.clear();
+                        middleGamma.clear();
+                        delta.clear();
+                        badPacketCount = 0;
+                        start();
+                    }
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    Log.i(TAG, "error:" + e.getMessage());
+
+                }
+
             }
         });
 
@@ -184,20 +194,47 @@ public class HomeFragment extends Fragment {
                     LinkDetectedHandler.sendEmptyMessageDelayed(1234, 5000); //do not
                     break;
                 case ConnectionStates.STATE_GET_DATA_TIME_OUT:
+                    Toast.makeText(mainActivity, "기기와의 연결이 끊겼습니다.", Toast.LENGTH_SHORT).show();
+                    textConnecting.setVisibility(View.GONE);
+                    text1.setVisibility(View.VISIBLE);
+                    text2.setVisibility(View.VISIBLE);
+                    text3.setVisibility(View.VISIBLE);
+                    shadowView.setVisibility(View.VISIBLE);
+                    cnt=0;
                     //get data time out
                     break;
                 case ConnectionStates.STATE_COMPLETE:
                     //read file complete
                     break;
                 case ConnectionStates.STATE_STOPPED:
+                    textConnecting.setVisibility(View.GONE);
+                    text1.setVisibility(View.VISIBLE);
+                    text2.setVisibility(View.VISIBLE);
+                    text3.setVisibility(View.VISIBLE);
+                    shadowView.setVisibility(View.VISIBLE);
+                    cnt=0;
                     break;
                 case ConnectionStates.STATE_DISCONNECTED:
+                    textConnecting.setVisibility(View.GONE);
+                    text1.setVisibility(View.VISIBLE);
+                    text2.setVisibility(View.VISIBLE);
+                    text3.setVisibility(View.VISIBLE);
+                    shadowView.setVisibility(View.VISIBLE);
+                    cnt=0;
                     break;
                 case ConnectionStates.STATE_ERROR:
+                    textConnecting.setVisibility(View.GONE);
+                    text1.setVisibility(View.VISIBLE);
+                    text2.setVisibility(View.VISIBLE);
+                    text3.setVisibility(View.VISIBLE);
+                    shadowView.setVisibility(View.VISIBLE);
+                    cnt=0;
                     Log.d(TAG, "Connect error, Please try again!");
                     break;
+
+
                 case ConnectionStates.STATE_FAILED:
-                    Log.d(TAG, "Connect failed, Please try again!");
+                    Toast.makeText(mainActivity, "기기와 연결 실패 하였습니다.", Toast.LENGTH_SHORT).show();
                     break;
             }
             Message msg = LinkDetectedHandler.obtainMessage();
@@ -299,7 +336,7 @@ public class HomeFragment extends Fragment {
                     Log.d(TAG, "HeadDataType.CODE_MEDITATION " + msg.arg1);
                     break;
                 case MindDataType.CODE_ATTENTION:
-                    Log.d(TAG, "CODE_ATTENTION " + msg.arg1);
+                    Log.e("ang", "CODE_ATTENTION " + msg.arg1);
 
                     break;
                 case MindDataType.CODE_EEGPOWER:
@@ -307,12 +344,14 @@ public class HomeFragment extends Fragment {
                     if (power.isValidate()) {
                         //Logger.e(String.valueOf(power.delta));
                         //here
+
                         textConnecting.setVisibility(View.VISIBLE);
                         text1.setVisibility(View.GONE);
                         text2.setVisibility(View.GONE);
                         text3.setVisibility(View.GONE);
                         shadowView.setVisibility(View.GONE);
                         cnt++;
+                        textConnecting.setText("결과를 측정 중 입니다.  "+String.valueOf(30-cnt)+" left ...");
                         delta.add(power.delta);
                         theta.add(power.theta);
                         lowAlpha.add(power.lowAlpha);

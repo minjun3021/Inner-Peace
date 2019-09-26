@@ -308,6 +308,7 @@ public class BluetoothDeviceDemoActivity extends Activity {
             Log.d(TAG, "connectionStates change to: " + connectionStates);
             currentState = connectionStates;
             switch (connectionStates) {
+
                 case ConnectionStates.STATE_CONNECTED:
                     //sensor.start();
                     showToast("Connected", Toast.LENGTH_SHORT);

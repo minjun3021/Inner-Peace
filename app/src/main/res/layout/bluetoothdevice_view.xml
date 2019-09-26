@@ -60,7 +60,6 @@
                 android:textSize="20dp" />
 
 
-
             <TextView
                 android:id="@+id/tv_meditation_label"
                 android:layout_width="wrap_content"
