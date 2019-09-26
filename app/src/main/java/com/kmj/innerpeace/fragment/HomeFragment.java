@@ -391,6 +391,22 @@ public class HomeFragment extends Fragment {
                                 public void onResponse(Call<KindOfMusic> call, Response<KindOfMusic> response) {
                                     if (response.isSuccessful() && response != null) {
                                         Logger.e(String.valueOf(response.body().getData()));
+                                        switch (response.body().getData()){
+                                            case 0:
+                                                Toast.makeText(mainActivity, "안정적인 상태입니다.", Toast.LENGTH_SHORT).show();
+                                                mainActivity.musicFragment.playMusic(0);
+                                                break;
+                                            case 1:
+                                                Toast.makeText(mainActivity, "행복합니다.", Toast.LENGTH_SHORT).show();
+                                                mainActivity.musicFragment.playMusic(1);
+                                                break;
+                                            case 2:
+                                                Toast.makeText(mainActivity, "안 좋은 일이 있었나봐요.", Toast.LENGTH_SHORT).show();
+                                                mainActivity.musicFragment.playMusic(2);
+                                                break;
+
+
+                                        }
                                         mainActivity.profileFragment.setPieChart();
                                         theta.clear();
                                         lowAlpha.clear();
