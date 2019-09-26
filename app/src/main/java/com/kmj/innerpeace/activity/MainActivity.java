@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ArrayList<Fragment> fragments;
     FragmentUtils fragmentUtils;
-    ProfileFragment profileFragment;
+    public ProfileFragment profileFragment;
     static DiaryFragment diaryFragment;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             diaryFragment.refresh();
-
+            profileFragment.setPieChart();
         }
 
     }

@@ -374,6 +374,7 @@ public class HomeFragment extends Fragment {
                         if (cnt == 30) {
 
                             if (tgStreamReader != null) {
+
                                 textConnecting.setVisibility(View.GONE);
                                 text1.setVisibility(View.VISIBLE);
                                 text2.setVisibility(View.VISIBLE);
@@ -390,6 +391,7 @@ public class HomeFragment extends Fragment {
                                 public void onResponse(Call<KindOfMusic> call, Response<KindOfMusic> response) {
                                     if (response.isSuccessful() && response != null) {
                                         Logger.e(String.valueOf(response.body().getData()));
+                                        mainActivity.profileFragment.setPieChart();
                                         theta.clear();
                                         lowAlpha.clear();
                                         highAlpha.clear();

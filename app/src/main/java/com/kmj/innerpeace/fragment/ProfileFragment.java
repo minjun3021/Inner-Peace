@@ -212,8 +212,8 @@ public class ProfileFragment extends Fragment {
                 pieChart1.setHoleColor(Color.WHITE);
                 pieChart1.setTransparentCircleRadius(61f);
                 ArrayList<PieEntry> yValues1 = new ArrayList<PieEntry>();
-                yValues1.add(new PieEntry(avg*100,"일기 감정"));
-                yValues1.add(new PieEntry(100-avg*100,""));
+                yValues1.add(new PieEntry(avg*100,"좋음"));
+                yValues1.add(new PieEntry(100-avg*100,"나쁨"));
                 pieChart1.animateY(1000, Easing.EasingOption.EaseInOutCubic); //애니메이션
                 PieDataSet dataSet1 = new PieDataSet(yValues1,"");
                 dataSet1.setSliceSpace(3f);
