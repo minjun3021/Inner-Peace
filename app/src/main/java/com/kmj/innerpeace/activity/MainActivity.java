@@ -162,14 +162,14 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                         return true;
-                    case R.id.bottom_playlist:
-                        if (isParentAccount == 1) {
-                            Toast.makeText(MainActivity.this, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 4, new Bundle());
-
-                        }
-                        return true;
+//                    case R.id.bottom_playlist:
+//                        if (isParentAccount == 1) {
+//                            Toast.makeText(MainActivity.this, "부모 계정은 사용할수없는 기능입니다.", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            fragmentUtils.setCurrentFragmentByPosition(getSupportFragmentManager(), 4, new Bundle());
+//
+//                        }
+//                        return true;
                 }
                 return false;
             }
