@@ -47,7 +47,7 @@ import retrofit2.Response;
 
 public class WriteActivity extends AppCompatActivity {
     Button emotion, verygood, good, soso, bad, verybad;
-    ImageView camera, img,back;
+    ImageView camera, img, back;
     Button upload;
     String e = "";
     ArrayList<String> permissions;
@@ -57,6 +57,7 @@ public class WriteActivity extends AppCompatActivity {
     EditText title, content;
     CircleImageView myProfile;
     TextView name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,19 +70,20 @@ public class WriteActivity extends AppCompatActivity {
         Logger.addLogAdapter(new AndroidLogAdapter());
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
-        back=findViewById(R.id.write_back);
+        back = findViewById(R.id.write_back);
         emotion = findViewById(R.id.write_emotion);
         verygood = findViewById(R.id.verygimotti);
         permissions = new ArrayList<>();
-        myProfile=findViewById(R.id.write_profile);
-        if (!MainActivity.imgPath.equals("")){
+        myProfile = findViewById(R.id.write_profile);
+        if (!MainActivity.imgPath.equals("")) {
             Glide.with(WriteActivity.this)
                     .load(MainActivity.imgPath)
+                    .placeholder(R.drawable.ic_profile)
                     .fitCenter()
                     .into(myProfile);
         }
 
-        name=findViewById(R.id.write_name);
+        name = findViewById(R.id.write_name);
         name.setText(MainActivity.name);
         good = findViewById(R.id.gimotti);
         soso = findViewById(R.id.soso);
@@ -102,24 +104,24 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!havePost) {
-                    havePost=true;
+                    havePost = true;
                     if (!title.getText().toString().replace(" ", "").equals("")) {
                         if (!content.getText().toString().replace(" ", "").equals("")) {
                             if (!e.equals("")) {
                                 if (havePic) {
+                                    Toast.makeText(WriteActivity.this, "잠시만 기다려주세요.", Toast.LENGTH_SHORT).show();
                                     NetworkHelper.getInstance().uploadPost(MainActivity.userToken, title.getText().toString(),
                                             content.getText().toString(), e, encodedString).enqueue(new Callback<DiaryData>() {
                                         @Override
                                         public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
                                             if (response.isSuccessful() && response != null) {
                                                 Toast.makeText(WriteActivity.this, "일기가 작성되었습니다.", Toast.LENGTH_SHORT).show();
-                                                NetworkHelper.getInstance().getScore(MainActivity.userToken,response.body().getData().get_id()).enqueue(new Callback<PostData>() {
+                                                NetworkHelper.getInstance().getScore(MainActivity.userToken, response.body().getData().get_id()).enqueue(new Callback<PostData>() {
                                                     @Override
                                                     public void onResponse(Call<PostData> call, Response<PostData> response) {
-                                                        if(response.isSuccessful() && response!=null){
+                                                        if (response.isSuccessful() && response != null) {
                                                             MainActivity.refresh();
-                                                        }
-                                                        else{
+                                                        } else {
 
                                                         }
                                                     }
@@ -153,12 +155,28 @@ public class WriteActivity extends AppCompatActivity {
                                     });
                                 } else {
                                     Logger.e(MainActivity.userToken);
+                                    Toast.makeText(WriteActivity.this, "잠시만 기다려주세요.", Toast.LENGTH_LONG).show();
                                     NetworkHelper.getInstance().uploadPost(MainActivity.userToken, title.getText().toString(),
                                             content.getText().toString(), e, "").enqueue(new Callback<DiaryData>() {
                                         @Override
                                         public void onResponse(Call<DiaryData> call, Response<DiaryData> response) {
                                             if (response.isSuccessful() && response != null) {
                                                 Toast.makeText(WriteActivity.this, "일기가 작성되었습니다.", Toast.LENGTH_SHORT).show();
+                                                NetworkHelper.getInstance().getScore(MainActivity.userToken, response.body().getData().get_id()).enqueue(new Callback<PostData>() {
+                                                    @Override
+                                                    public void onResponse(Call<PostData> call, Response<PostData> response) {
+                                                        if (response.isSuccessful() && response != null) {
+                                                            MainActivity.refresh();
+                                                        } else {
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<PostData> call, Throwable t) {
+
+                                                    }
+                                                });
                                                 new Handler().postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {

@@ -4,9 +4,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkHelper {
-    final static String url = "http://3.130.54.219";
+    final static String url = "http://34.84.240.128";
     final static int port = 8000;
-//3.130.54.219:3000
+//3.130.54.219:3000 http://34.84.240.128:8000/
 
     private static Retrofit retrofit;
 

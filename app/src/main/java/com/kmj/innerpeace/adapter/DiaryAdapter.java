@@ -102,6 +102,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         if (!MainActivity.imgPath.equals("")){
             Glide.with(mainActivity)
                     .load(MainActivity.imgPath)
+                    .placeholder(R.drawable.ic_profile)
                     .fitCenter()
                     .into(holder.circleImageView);
         }
@@ -131,8 +132,9 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
             layoutParams.dimensionRatio = "W,1:1";
             holder.emotion.setLayoutParams(layoutParams);
             Glide.with(mainActivity)
-                    .load("http://3.130.54.219:8000/"+temp.getImgPath())
+                    .load("http://34.84.240.128:8000/"+temp.getImgPath())
                     .placeholder(R.drawable.sea)
+
                     .fitCenter()
                     .into(holder.image);
         }

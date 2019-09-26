@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121319"
+    tools:context=".activity.SettingActivity">
+
+    <ImageView
+        android:id="@+id/setting_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="45dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/setting_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="10sp"
+        android:text="ㅁㅁㅁ님"
+        android:textColor="#996ad7"
+        android:textSize="21sp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/setting_text2"
+        app:layout_constraintTop_toBottomOf="@id/setting_back" />
+
+    <ImageView
+        android:id="@+id/setting_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/bg_diary"
+        android:tint="#fff"
+        app:layout_constraintBottom_toTopOf="@id/setting_ok"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@id/setting_cancel"
+        app:layout_constraintRight_toRightOf="@id/setting_ok"
+
+        app:layout_constraintTop_toBottomOf="@id/setting_text1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/setting_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="9sp"
+        android:text="의 정보"
+
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/setting_text1"
+        app:layout_constraintLeft_toRightOf="@id/setting_text1"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/setting_cancel"
+        android:layout_width="134dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="49dp"
+        android:background="@drawable/bg_cancel"
+        android:text="취소"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/setting_ok" />
+
+    <Button
+        android:id="@+id/setting_ok"
+        android:layout_width="134dp"
+        android:layout_height="37dp"
+        android:background="@drawable/bg_ok"
+        android:text="확인"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/setting_cancel"
+        app:layout_constraintLeft_toRightOf="@id/setting_cancel"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setting_profile"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintLeft_toLeftOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/setting_box" />
+
+    <TextView
+        android:id="@+id/setting_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="이름  ㅁㅁㅁ"
+        android:textColor="#121319"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/setting_profile"
+        app:layout_constraintTop_toTopOf="@id/setting_profile" />
+
+    <TextView
+        android:id="@+id/setting_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="휴대폰 번호  010-1234-5678"
+        android:textColor="#121319"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toTopOf="@id/setting_email"
+        app:layout_constraintLeft_toLeftOf="@id/setting_name"
+        app:layout_constraintTop_toBottomOf="@id/setting_name" />
+
+    <TextView
+        android:id="@+id/setting_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="E-mail  abc@gmail.com"
+        android:textColor="#121319"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="@id/setting_profile"
+        app:layout_constraintLeft_toLeftOf="@id/setting_name"
+        app:layout_constraintTop_toBottomOf="@id/setting_number" />
+
+    <TextView
+        android:id="@+id/setting_infotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="15dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="자신에 대해 소개 해 주세요 ( 3개까지 )"
+        android:textColor="#121319"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toLeftOf="@id/setting_profile"
+        app:layout_constraintTop_toBottomOf="@id/setting_profile" />
+
+    <Button
+        android:id="@+id/info_1"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_diary"
+        android:text="유아"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_infotext"
+        app:layout_constraintRight_toLeftOf="@id/info_2"
+        app:layout_constraintTop_toBottomOf="@id/setting_infotext" />
+
+    <Button
+        android:id="@+id/info_2"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="초등학생"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_1"
+        app:layout_constraintRight_toLeftOf="@id/info_3"
+        app:layout_constraintTop_toTopOf="@id/info_1" />
+
+    <Button
+        android:id="@+id/info_3"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="중학생"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_2"
+        app:layout_constraintRight_toLeftOf="@id/info_4"
+        app:layout_constraintTop_toTopOf="@id/info_1" />
+
+    <Button
+        android:id="@+id/info_4"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="고등학생"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/info_1" />
+
+
+    <Button
+        android:id="@+id/info_5"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/bg_diary"
+        android:text="직장인"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_infotext"
+        app:layout_constraintRight_toLeftOf="@id/info_2"
+        app:layout_constraintTop_toBottomOf="@id/info_1" />
+
+    <Button
+        android:id="@+id/info_6"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="취준생"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_1"
+        app:layout_constraintRight_toLeftOf="@id/info_3"
+        app:layout_constraintTop_toTopOf="@id/info_5" />
+
+    <Button
+        android:id="@+id/info_7"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="성인"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_2"
+        app:layout_constraintRight_toLeftOf="@id/info_4"
+        app:layout_constraintTop_toTopOf="@id/info_5" />
+
+    <Button
+        android:id="@+id/info_8"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="청소년"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/info_5" />
+
+    <Button
+        android:id="@+id/info_9"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/bg_diary"
+        android:text="남자"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_infotext"
+        app:layout_constraintRight_toLeftOf="@id/info_2"
+        app:layout_constraintTop_toBottomOf="@id/info_5" />
+
+    <Button
+        android:id="@+id/info_10"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="여자"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_1"
+        app:layout_constraintRight_toLeftOf="@id/info_3"
+        app:layout_constraintTop_toTopOf="@id/info_9" />
+
+    <Button
+        android:id="@+id/info_11"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="백수"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_2"
+        app:layout_constraintRight_toLeftOf="@id/info_4"
+        app:layout_constraintTop_toTopOf="@id/info_9" />
+
+    <Button
+        android:id="@+id/info_12"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="기타"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/info_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/info_9" />
+
+    <TextView
+        android:id="@+id/setting_stresstext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:text="스트레스를 받는 이유 ( 3개까지 )"
+        android:textColor="#121319"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toLeftOf="@id/setting_infotext"
+        app:layout_constraintTop_toBottomOf="@id/info_9" />
+
+    <Button
+        android:id="@+id/stress_1"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_diary"
+        android:text="인간관계"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_stresstext"
+        app:layout_constraintRight_toLeftOf="@id/stress_2"
+        app:layout_constraintTop_toBottomOf="@id/setting_stresstext" />
+
+    <Button
+        android:id="@+id/stress_2"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="학업"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_1"
+        app:layout_constraintRight_toLeftOf="@id/stress_3"
+        app:layout_constraintTop_toTopOf="@id/stress_1" />
+
+    <Button
+        android:id="@+id/stress_3"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="여가"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_2"
+        app:layout_constraintRight_toLeftOf="@id/stress_4"
+        app:layout_constraintTop_toTopOf="@id/stress_1" />
+
+    <Button
+        android:id="@+id/stress_4"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="연애"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/stress_1" />
+
+    <Button
+        android:id="@+id/stress_5"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/bg_diary"
+        android:text="부담감"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_stresstext"
+        app:layout_constraintRight_toLeftOf="@id/stress_2"
+        app:layout_constraintTop_toBottomOf="@id/stress_1" />
+
+    <Button
+        android:id="@+id/stress_6"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="압박감"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_1"
+        app:layout_constraintRight_toLeftOf="@id/stress_3"
+        app:layout_constraintTop_toTopOf="@id/stress_5" />
+
+    <Button
+        android:id="@+id/stress_7"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="진학"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_2"
+        app:layout_constraintRight_toLeftOf="@id/stress_4"
+        app:layout_constraintTop_toTopOf="@id/stress_5" />
+
+    <Button
+        android:id="@+id/stress_8"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="취업"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/stress_5" />
+
+    <Button
+        android:id="@+id/stress_9"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/bg_diary"
+        android:text="가족"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="@id/setting_stresstext"
+        app:layout_constraintRight_toLeftOf="@id/stress_2"
+        app:layout_constraintTop_toBottomOf="@id/stress_5" />
+
+    <Button
+        android:id="@+id/stress_10"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="통학"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_1"
+        app:layout_constraintRight_toLeftOf="@id/stress_3"
+        app:layout_constraintTop_toTopOf="@id/stress_9" />
+
+    <Button
+        android:id="@+id/stress_11"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bg_diary"
+        android:text="기타"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_2"
+        app:layout_constraintRight_toLeftOf="@id/stress_4"
+        app:layout_constraintTop_toTopOf="@id/stress_9" />
+
+    <Button
+        android:id="@+id/stress_12"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/bg_diary"
+        android:text="기타"
+        android:textColor="#fff"
+        android:textSize="9sp"
+        app:layout_constraintLeft_toRightOf="@id/stress_3"
+        app:layout_constraintRight_toRightOf="@id/setting_box"
+        app:layout_constraintTop_toTopOf="@id/stress_9" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setting_camera"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="10dp"
+        android:src="#51356c"
+        app:layout_constraintBottom_toBottomOf="@id/setting_profile"
+        app:layout_constraintRight_toRightOf="@id/setting_profile" />
+
+
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/ic_camera_48dp"
+        app:layout_constraintBottom_toBottomOf="@id/setting_camera"
+        app:layout_constraintLeft_toLeftOf="@id/setting_camera"
+        app:layout_constraintRight_toRightOf="@id/setting_camera"
+        app:layout_constraintTop_toTopOf="@id/setting_camera" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.kmj.innerpeace.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import retrofit2.Response;
 public class DiaryFragment extends Fragment {
     MainActivity mainActivity;
     ShadowView create;
+    Context context;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private DiaryAdapter mAdapter;
@@ -40,10 +42,13 @@ public class DiaryFragment extends Fragment {
     CircleImageView myProfile;
     TextView name;
     Diarys diarys;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mainActivity= (MainActivity) getActivity();
     }
 
     @Override
@@ -63,6 +68,7 @@ public class DiaryFragment extends Fragment {
         if (!MainActivity.imgPath.equals("")){
             Glide.with(mainActivity)
                     .load(MainActivity.imgPath)
+                    .placeholder(R.drawable.ic_profile)
                     .fitCenter()
                     .into(myProfile);
         }
@@ -117,5 +123,11 @@ public class DiaryFragment extends Fragment {
             }
         });
     }
-
+    public void profileRefresh(){
+        Glide.with(mainActivity)
+                .load(MainActivity.imgPath)
+                .placeholder(R.drawable.ic_profile)
+                .fitCenter()
+                .into(myProfile);
+    }
 }

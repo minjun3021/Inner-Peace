@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Fragment> fragments;
     FragmentUtils fragmentUtils;
     ProfileFragment profileFragment;
-   static DiaryFragment diaryFragment;
+    static DiaryFragment diaryFragment;
     HomeFragment homeFragment;
     MusicFragment musicFragment;
     PlaylistFragment playlistFragment;
@@ -52,11 +52,23 @@ public class MainActivity extends AppCompatActivity {
     public static String userToken;
     public static String name;
     public static String imgPath;
+    public static String email;
+    public static String phone;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        diaryFragment.refresh();
+
+        if (requestCode == 321) {
+            Logger.e("letsgo");
+            profileFragment.profileRefresh();
+
+        }
+        else {
+            diaryFragment.refresh();
+
+        }
+
     }
 
     @Override
@@ -72,25 +84,26 @@ public class MainActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#121319"));
         backPressCloseHandler = new BackPressCloseHandler(this);
-        SharedPreferences prefs =getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
         userToken = prefs.getString("userToken", "");
         NetworkHelper.getInstance().getMyProfile(userToken).enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
-                if(response.isSuccessful()&& response!=null){
+                if (response.isSuccessful() && response != null) {
 
                     Logger.e(response.body().getData().getName());
                     Logger.e(response.body().getData().getImgPath());
-                    name=response.body().getData().getName();
-                    if(!response.body().getData().getImgPath().equals("")){
-                        imgPath="http://3.130.54.219:8000/"+response.body().getData().getImgPath();
-                    }
-                    else{
-                        imgPath="";
+                    MainActivity.name = response.body().getData().getName();
+                    MainActivity.email = response.body().getData().getEmail();
+                    MainActivity.phone = response.body().getData().getPhone();
+                    if (!response.body().getData().getImgPath().equals("")) {
+                        MainActivity.imgPath = "http://34.84.240.128:8000/" + response.body().getData().getImgPath();
+                    } else {
+                        MainActivity.imgPath = "";
                     }
 
 
-                }else{
+                } else {
 
                 }
             }
@@ -163,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public  void checkPermission() {
+    public void checkPermission() {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             permissions.add(Manifest.permission.CAMERA);
 
@@ -177,7 +190,8 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(MainActivity.this, reqPermissionArray, 888);
         }
     }
-    public static void refresh(){
+
+    public static void refresh() {
         diaryFragment.refresh();
     }
 }

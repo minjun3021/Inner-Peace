@@ -30,6 +30,7 @@ import com.kmj.innerpeace.Data.SendData;
 import com.kmj.innerpeace.R;
 import com.kmj.innerpeace.activity.MainActivity;
 import com.kmj.innerpeace.retrofit.NetworkHelper;
+import com.loopeer.shadow.ShadowView;
 import com.neurosky.connection.ConnectionStates;
 import com.neurosky.connection.DataType.MindDataType;
 import com.neurosky.connection.DataType.MindDataType.FilterType;
@@ -74,10 +75,17 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
+    TextView text1,text2,text3,textConnecting;
+    ShadowView shadowView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        text1=v.findViewById(R.id.home_text1);
+        text2=v.findViewById(R.id.home_text2);
+        text3=v.findViewById(R.id.home_text3);
+        textConnecting=v.findViewById(R.id.home_connectingtext);
+        shadowView=v.findViewById(R.id.home_box);
+
         name=v.findViewById(R.id.home_name);
         name.setText(MainActivity.name+"님");
         mainActivity = (MainActivity) getActivity();
@@ -299,6 +307,11 @@ public class HomeFragment extends Fragment {
                     if (power.isValidate()) {
                         //Logger.e(String.valueOf(power.delta));
                         //here
+                        textConnecting.setVisibility(View.VISIBLE);
+                        text1.setVisibility(View.GONE);
+                        text2.setVisibility(View.GONE);
+                        text3.setVisibility(View.GONE);
+                        shadowView.setVisibility(View.GONE);
                         cnt++;
                         delta.add(power.delta);
                         theta.add(power.theta);
@@ -314,6 +327,11 @@ public class HomeFragment extends Fragment {
                         if (cnt == 30) {
 
                             if (tgStreamReader != null) {
+                                textConnecting.setVisibility(View.GONE);
+                                text1.setVisibility(View.VISIBLE);
+                                text2.setVisibility(View.VISIBLE);
+                                text3.setVisibility(View.VISIBLE);
+                                shadowView.setVisibility(View.VISIBLE);
                                 tgStreamReader.stop();
                             }
                             data = new EEGData(delta, theta, lowAlpha, highAlpha, lowBeta, highBeta, lowGamma, middleGamma);

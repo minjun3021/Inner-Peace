@@ -73,5 +73,9 @@ public interface NetworkInterface {
     @POST("/auth/getProfile")
     Call<Profile> getMyProfile(@Header("Authorization") String token);
 
+    @POST("/auth/changeProfileImage")
+    @FormUrlEncoded
+    Call<Profile> ChangeProfile(@Header("Authorization") String token,@Field("img") String img);
+
 
 }
