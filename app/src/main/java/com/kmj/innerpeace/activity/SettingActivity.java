@@ -120,6 +120,7 @@ public class SettingActivity extends AppCompatActivity {
         phone = findViewById(R.id.setting_number);
         email = findViewById(R.id.setting_email);
         mainname = findViewById(R.id.setting_text1);
+        mainname.setText(MainActivity.name+"님");
         back = findViewById(R.id.setting_back);
         name.setText("이름 " + MainActivity.name);
         phone.setText("휴대폰 번호 " + MainActivity.phone);
